@@ -360,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>A simple <strong>warming rate</strong> for each year (a slope: °F per day)</li>
 </ol>
 <p>If “Early spring” is real, those years should show a steeper upward trend.</p>
-<div id="2b248a64-bfdd-4edc-addc-5bdfffdc2113" class="cell">
+<div id="2b248a64-bfdd-4edc-addc-5bdfffdc2113" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add "day since Feb 2" index within each year</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>winter_weather <span class="op">=</span> winter_weather.copy()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>winter_weather[<span class="st">"day_since_gh"</span>] <span class="op">=</span> (winter_weather[<span class="st">"date"</span>] <span class="op">-</span> pd.to_datetime(<span class="bu">dict</span>(year<span class="op">=</span>winter_weather[<span class="st">"year"</span>], month<span class="op">=</span><span class="dv">2</span>, day<span class="op">=</span><span class="dv">2</span>))).dt.days</span>
@@ -388,8 +388,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[4]</span><span class="ansi-green-fg">, line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Add "day since Feb 2" index within each year</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">2</span> winter_weather = <span class="ansi-yellow-bg">winter_weather</span>.copy()
+<span class="ansi-green-fg">      3</span> winter_weather[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">day_since_gh</span><span class="ansi-yellow-fg">"</span>] = (winter_weather[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">date</span><span class="ansi-yellow-fg">"</span>] - pd.to_datetime(<span style="color:rgb(0,135,0)">dict</span>(year=winter_weather[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">year</span><span class="ansi-yellow-fg">"</span>], month=<span class="ansi-green-fg">2</span>, day=<span class="ansi-green-fg">2</span>))).dt.days
+<span class="ansi-green-fg">      5</span> <span style="font-style:italic;color:rgb(95,135,135)"># Merge prediction onto daily rows</span>
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_weather' is not defined</pre>
 </div>
-<div id="0a7dd532-212a-4010-8e38-79b2bfe37870" class="cell">
+</div>
+</div>
+<div id="0a7dd532-212a-4010-8e38-79b2bfe37870" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute a simple slope per year: low ~ day_since_gh</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>slopes <span class="op">=</span> []</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> yr, df_yr <span class="kw">in</span> winter_daily.groupby(<span class="st">"year"</span>):</span>
@@ -403,6 +416,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>slopes_df <span class="op">=</span> pd.DataFrame(slopes)</span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>slopes_df.groupby(<span class="st">"prediction"</span>)[<span class="st">"warming_slope_low_per_day"</span>].describe().<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[3]</span><span class="ansi-green-fg">, line 3</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Compute a simple slope per year: low ~ day_since_gh</span>
+<span class="ansi-green-fg">      2</span> slopes = []
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">3</span> <span style="font-weight:bold;color:rgb(0,135,0)">for</span> yr, df_yr <span style="font-weight:bold;color:rgb(175,0,255)">in</span> <span class="ansi-yellow-bg">winter_daily</span>.groupby(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">year</span><span class="ansi-yellow-fg">"</span>):
+<span class="ansi-green-fg">      4</span>     x = df_yr[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">day_since_gh</span><span class="ansi-yellow-fg">"</span>].values
+<span class="ansi-green-fg">      5</span>     y = df_yr[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">low</span><span class="ansi-yellow-fg">"</span>].values
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_daily' is not defined</pre>
+</div>
+</div>
 </div>
 
 
