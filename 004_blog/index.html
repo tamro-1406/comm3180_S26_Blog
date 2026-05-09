@@ -8,7 +8,7 @@
 
 <meta name="author" content="Tarek Amro">
 <meta name="dcterms.date" content="2026-03-06">
-<meta name="description" content="A data story using 20 years of Philadelphia crash records to show why fewer crashes does not mean safer streets – and why 2020 changed everything.">
+<meta name="description" content="A data story using 20 years of Philadelphia crash records to show why fewer crashes does not mean safer streets and why 2020 changed everything.">
 
 <title>Empty Streets, Deadlier Crashes – Tarek’s Data Stories</title>
 <style>
@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    A data story using 20 years of Philadelphia crash records to show why fewer crashes does not mean safer streets – and why 2020 changed everything.
+    A data story using 20 years of Philadelphia crash records to show why fewer crashes does not mean safer streets and why 2020 changed everything.
   </div>
 </div>
 
@@ -205,8 +205,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Empty Streets, Deadlier Crashes</h1>
 <p>Philadelphia logged over 214,000 crashes between 2005 and 2024. If you plot the raw crash count over time, the line goes down. Fewer crashes per year than two decades ago. That sounds like progress.</p>
 <p>But there is a second line hiding underneath the first one, and it goes in the opposite direction.</p>
-<p>When you look at what those crashes actually do to people – who dies, who gets hurt, who drives away without stopping – the story of Philadelphia’s roads is not one of improvement. It is a story of a city where crashes became less frequent but dramatically more deadly, and where the pandemic broke something that has not been fixed since.</p>
-<div id="cell-3" class="cell" data-execution_count="10">
+<p>When you look at what those crashes actually do to people, as in who dies, who gets hurt, who drives away without stopping, the story of Philadelphia’s roads is not one of improvement. It is a story of a city where crashes became less frequent but dramatically more deadly, and where the pandemic broke something that has not been fixed since.</p>
+<div id="cell-3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -241,37 +241,36 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 </div>
 <section id="the-first-story-fewer-crashes.-the-second-story-more-deaths-per-crash." class="level2">
 <h2 class="anchored" data-anchor-id="the-first-story-fewer-crashes.-the-second-story-more-deaths-per-crash.">The First Story: Fewer Crashes. The Second Story: More Deaths Per Crash.</h2>
-<p>From 2005 to 2019, Philadelphia averaged around 11,000 crashes a year. Since 2020, that number has fallen – but not for good reasons.</p>
+<p>From 2005 to 2019, Philadelphia averaged around 11,000 crashes a year. Since 2020, that number has fallen, but not for good reasons.</p>
 <p>The death rate per 1,000 crashes tells the real story. Before the pandemic, Philadelphia typically saw 8 to 10 deaths per 1,000 crashes. In 2020, that number jumped to 16.3. By 2024, it had reached 18.5.</p>
 <p>Fewer crashes, but nearly twice as likely to be fatal. The city did not get safer. The crashes that remained got worse.</p>
-<div id="cell-5" class="cell" data-execution_count="11">
+<div id="cell-5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="dv">5</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude 2024 (partial year) from rate line for cleanliness</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>full_years <span class="op">=</span> annual[annual[<span class="st">'CRASH_YEAR'</span>] <span class="op">&lt;</span> <span class="dv">2024</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ax1.bar(annual[<span class="st">'CRASH_YEAR'</span>], annual[<span class="st">'crashes'</span>], color<span class="op">=</span><span class="st">'#4a7ab5'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Total crashes'</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>ax2.plot(full_years[<span class="st">'CRASH_YEAR'</span>], full_years[<span class="st">'death_rate'</span>], color<span class="op">=</span><span class="st">'#e05a3a'</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>         linewidth<span class="op">=</span><span class="fl">2.5</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span><span class="st">'Deaths per 1,000 crashes'</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax2.axvline(<span class="dv">2020</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax2.annotate(<span class="st">'2020: pandemic</span><span class="ch">\n</span><span class="st">death rate doubles'</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>             xy<span class="op">=</span>(<span class="dv">2020</span>, <span class="fl">16.3</span>), xytext<span class="op">=</span>(<span class="fl">2016.5</span>, <span class="fl">17.5</span>),</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>             fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>             arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>))</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Year'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'Total crashes'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">'#4a7ab5'</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Deaths per 1,000 crashes'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Philadelphia Crashes vs Death Rate Per 1,000 Crashes (2005-2023)'</span>,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>              fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>lines1, labels1 <span class="op">=</span> ax1.get_legend_handles_labels()</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>lines2, labels2 <span class="op">=</span> ax2.get_legend_handles_labels()</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>ax1.legend(lines1 <span class="op">+</span> lines2, labels1 <span class="op">+</span> labels2, fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>ax2.set_ylim(<span class="dv">5</span>, <span class="dv">22</span>)</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>full_years <span class="op">=</span> annual[annual[<span class="st">'CRASH_YEAR'</span>] <span class="op">&lt;</span> <span class="dv">2024</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ax1.bar(annual[<span class="st">'CRASH_YEAR'</span>], annual[<span class="st">'crashes'</span>], color<span class="op">=</span><span class="st">'#4a7ab5'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">'Total crashes'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ax2.plot(full_years[<span class="st">'CRASH_YEAR'</span>], full_years[<span class="st">'death_rate'</span>], color<span class="op">=</span><span class="st">'#e05a3a'</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>         linewidth<span class="op">=</span><span class="fl">2.5</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">5</span>, label<span class="op">=</span><span class="st">'Deaths per 1,000 crashes'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ax2.axvline(<span class="dv">2020</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">1</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax2.annotate(<span class="st">'2020: pandemic</span><span class="ch">\n</span><span class="st">death rate doubles'</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>             xy<span class="op">=</span>(<span class="dv">2020</span>, <span class="fl">16.3</span>), xytext<span class="op">=</span>(<span class="fl">2016.5</span>, <span class="fl">17.5</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>             fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>             arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>))</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Year'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'Total crashes'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">'#4a7ab5'</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Deaths per 1,000 crashes'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Philadelphia Crashes vs Death Rate Per 1,000 Crashes (2005-2023)'</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>              fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>lines1, labels1 <span class="op">=</span> ax1.get_legend_handles_labels()</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>lines2, labels2 <span class="op">=</span> ax2.get_legend_handles_labels()</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>ax1.legend(lines1 <span class="op">+</span> lines2, labels1 <span class="op">+</span> labels2, fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>ax2.set_ylim(<span class="dv">5</span>, <span class="dv">22</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -284,49 +283,47 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <section id="the-pandemic-unlocked-something-on-philadelphias-streets" class="level2">
 <h2 class="anchored" data-anchor-id="the-pandemic-unlocked-something-on-philadelphias-streets">The Pandemic Unlocked Something on Philadelphia’s Streets</h2>
 <p>In 2020, traffic dropped sharply across the city. Fewer cars, emptier roads, quieter intersections. By every traditional measure, conditions should have been safer.</p>
-<p>Instead, Philadelphia recorded 166 traffic fatalities – the highest count since the dataset begins in 2005, and 82% more than the year before. The death rate nearly doubled. Hit-and-run crashes reached 2,455, rising to 2,579 in 2021 – the all-time high in this dataset.</p>
+<p>Instead, Philadelphia recorded 166 traffic fatalities, the highest count since the dataset begins in 2005, and 82% more than the year before. The death rate nearly doubled. Hit-and-run crashes reached 2,455, rising to 2,579 in 2021, the all-time high in this dataset.</p>
 <p>Empty streets did not produce cautious drivers. They produced faster ones. And drivers who crash on empty roads, at higher speeds, are far less likely to survive.</p>
-<p>The pedestrian death count tells the same story. Philadelphia averaged 34 pedestrian deaths per year from 2005 to 2019. From 2020 onwards, that average rose to 44 – a 29% increase, in years when there were nominally fewer people on the roads.</p>
-<div id="cell-7" class="cell" data-execution_count="12">
+<p>The pedestrian death count tells the same story. Philadelphia averaged 34 pedestrian deaths per year from 2005 to 2019. From 2020 onwards, that average rose to 44, a 29% increase, in years when there were nominally fewer people on the roads.</p>
+<div id="cell-7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Left: fatalities bar, colored pre/post 2020</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>colors_fat <span class="op">=</span> [<span class="st">'#e05a3a'</span> <span class="cf">if</span> y <span class="op">&gt;=</span> <span class="dv">2020</span> <span class="cf">else</span> <span class="st">'#4a7ab5'</span> <span class="cf">for</span> y <span class="kw">in</span> annual[<span class="st">'CRASH_YEAR'</span>]]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].bar(annual[<span class="st">'CRASH_YEAR'</span>], annual[<span class="st">'fatalities'</span>], color<span class="op">=</span>colors_fat, edgecolor<span class="op">=</span><span class="st">'white'</span>, linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axhline(annual[annual[<span class="st">'CRASH_YEAR'</span>] <span class="op">&lt;</span> <span class="dv">2020</span>][<span class="st">'fatalities'</span>].mean(),</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span><span class="st">'#4a7ab5'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span><span class="ss">f'Pre-2020 avg: </span><span class="sc">{</span>annual[annual[<span class="st">"CRASH_YEAR"</span>]<span class="op">&lt;</span><span class="dv">2020</span>][<span class="st">"fatalities"</span>]<span class="sc">.</span>mean()<span class="sc">:.0f}</span><span class="ss">'</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axhline(annual[annual[<span class="st">'CRASH_YEAR'</span>] <span class="op">&gt;=</span> <span class="dv">2020</span>][<span class="st">'fatalities'</span>].mean(),</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span><span class="st">'#e05a3a'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span><span class="ss">f'2020+ avg: </span><span class="sc">{</span>annual[annual[<span class="st">"CRASH_YEAR"</span>]<span class="op">&gt;=</span><span class="dv">2020</span>][<span class="st">"fatalities"</span>]<span class="sc">.</span>mean()<span class="sc">:.0f}</span><span class="ss">'</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Annual Traffic Fatalities, Philadelphia'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'Deaths'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xticks(annual[<span class="st">'CRASH_YEAR'</span>][::<span class="dv">2</span>])</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xticklabels(annual[<span class="st">'CRASH_YEAR'</span>][::<span class="dv">2</span>], rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].annotate(<span class="st">'2020: 166 deaths</span><span class="ch">\n</span><span class="st">+82% vs 2019'</span>, xy<span class="op">=</span>(<span class="dv">2020</span>, <span class="dv">166</span>),</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                 xytext<span class="op">=</span>(<span class="dv">2016</span>, <span class="dv">170</span>), fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                 arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>))</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Right: hit and run</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>hit_run <span class="op">=</span> flag_p.groupby(<span class="st">'CRASH_YEAR'</span>)[<span class="st">'HIT_RUN'</span>].<span class="bu">sum</span>().reset_index()</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>hit_run <span class="op">=</span> hit_run[hit_run[<span class="st">'CRASH_YEAR'</span>] <span class="op">&lt;</span> <span class="dv">2024</span>]</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>colors_hr <span class="op">=</span> [<span class="st">'#e05a3a'</span> <span class="cf">if</span> y <span class="op">&gt;=</span> <span class="dv">2020</span> <span class="cf">else</span> <span class="st">'#7f8c8d'</span> <span class="cf">for</span> y <span class="kw">in</span> hit_run[<span class="st">'CRASH_YEAR'</span>]]</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].bar(hit_run[<span class="st">'CRASH_YEAR'</span>], hit_run[<span class="st">'HIT_RUN'</span>], color<span class="op">=</span>colors_hr, edgecolor<span class="op">=</span><span class="st">'white'</span>, linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Hit-and-Run Crashes Per Year, Philadelphia'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'Hit-and-run crashes'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticks(hit_run[<span class="st">'CRASH_YEAR'</span>][::<span class="dv">2</span>])</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticklabels(hit_run[<span class="st">'CRASH_YEAR'</span>][::<span class="dv">2</span>], rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].annotate(<span class="st">'2021: 2,579</span><span class="ch">\n</span><span class="st">all-time high'</span>, xy<span class="op">=</span>(<span class="dv">2021</span>, <span class="dv">2579</span>),</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>                 xytext<span class="op">=</span>(<span class="dv">2017</span>, <span class="dv">2600</span>), fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>                 arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>))</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(handles<span class="op">=</span>[</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#e05a3a'</span>, label<span class="op">=</span><span class="st">'2020 onwards'</span>),</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#7f8c8d'</span>, label<span class="op">=</span><span class="st">'Pre-2020'</span>)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>], fontsize<span class="op">=</span><span class="dv">9</span>)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>colors_fat <span class="op">=</span> [<span class="st">'#e05a3a'</span> <span class="cf">if</span> y <span class="op">&gt;=</span> <span class="dv">2020</span> <span class="cf">else</span> <span class="st">'#4a7ab5'</span> <span class="cf">for</span> y <span class="kw">in</span> annual[<span class="st">'CRASH_YEAR'</span>]]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].bar(annual[<span class="st">'CRASH_YEAR'</span>], annual[<span class="st">'fatalities'</span>], color<span class="op">=</span>colors_fat, edgecolor<span class="op">=</span><span class="st">'white'</span>, linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axhline(annual[annual[<span class="st">'CRASH_YEAR'</span>] <span class="op">&lt;</span> <span class="dv">2020</span>][<span class="st">'fatalities'</span>].mean(),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span><span class="st">'#4a7ab5'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span><span class="ss">f'Pre-2020 avg: </span><span class="sc">{</span>annual[annual[<span class="st">"CRASH_YEAR"</span>]<span class="op">&lt;</span><span class="dv">2020</span>][<span class="st">"fatalities"</span>]<span class="sc">.</span>mean()<span class="sc">:.0f}</span><span class="ss">'</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axhline(annual[annual[<span class="st">'CRASH_YEAR'</span>] <span class="op">&gt;=</span> <span class="dv">2020</span>][<span class="st">'fatalities'</span>].mean(),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                color<span class="op">=</span><span class="st">'#e05a3a'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                label<span class="op">=</span><span class="ss">f'2020+ avg: </span><span class="sc">{</span>annual[annual[<span class="st">"CRASH_YEAR"</span>]<span class="op">&gt;=</span><span class="dv">2020</span>][<span class="st">"fatalities"</span>]<span class="sc">.</span>mean()<span class="sc">:.0f}</span><span class="ss">'</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Annual Traffic Fatalities, Philadelphia'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'Deaths'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xticks(annual[<span class="st">'CRASH_YEAR'</span>][::<span class="dv">2</span>])</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xticklabels(annual[<span class="st">'CRASH_YEAR'</span>][::<span class="dv">2</span>], rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].annotate(<span class="st">'2020: 166 deaths</span><span class="ch">\n</span><span class="st">+82% vs 2019'</span>, xy<span class="op">=</span>(<span class="dv">2020</span>, <span class="dv">166</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>                 xytext<span class="op">=</span>(<span class="dv">2016</span>, <span class="dv">170</span>), fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                 arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>hit_run <span class="op">=</span> flag_p.groupby(<span class="st">'CRASH_YEAR'</span>)[<span class="st">'HIT_RUN'</span>].<span class="bu">sum</span>().reset_index()</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>hit_run <span class="op">=</span> hit_run[hit_run[<span class="st">'CRASH_YEAR'</span>] <span class="op">&lt;</span> <span class="dv">2024</span>]</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>colors_hr <span class="op">=</span> [<span class="st">'#e05a3a'</span> <span class="cf">if</span> y <span class="op">&gt;=</span> <span class="dv">2020</span> <span class="cf">else</span> <span class="st">'#7f8c8d'</span> <span class="cf">for</span> y <span class="kw">in</span> hit_run[<span class="st">'CRASH_YEAR'</span>]]</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].bar(hit_run[<span class="st">'CRASH_YEAR'</span>], hit_run[<span class="st">'HIT_RUN'</span>], color<span class="op">=</span>colors_hr, edgecolor<span class="op">=</span><span class="st">'white'</span>, linewidth<span class="op">=</span><span class="fl">0.4</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Hit-and-Run Crashes Per Year, Philadelphia'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'Hit-and-run crashes'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticks(hit_run[<span class="st">'CRASH_YEAR'</span>][::<span class="dv">2</span>])</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xticklabels(hit_run[<span class="st">'CRASH_YEAR'</span>][::<span class="dv">2</span>], rotation<span class="op">=</span><span class="dv">45</span>, ha<span class="op">=</span><span class="st">'right'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].annotate(<span class="st">'2021: 2,579</span><span class="ch">\n</span><span class="st">all-time high'</span>, xy<span class="op">=</span>(<span class="dv">2021</span>, <span class="dv">2579</span>),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>                 xytext<span class="op">=</span>(<span class="dv">2017</span>, <span class="dv">2600</span>), fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                 arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#e05a3a'</span>))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(handles<span class="op">=</span>[</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#e05a3a'</span>, label<span class="op">=</span><span class="st">'2020 onwards'</span>),</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#7f8c8d'</span>, label<span class="op">=</span><span class="st">'Pre-2020'</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>], fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -339,9 +336,9 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <section id="what-actually-kills-people-the-anatomy-of-a-fatal-crash" class="level2">
 <h2 class="anchored" data-anchor-id="what-actually-kills-people-the-anatomy-of-a-fatal-crash">What Actually Kills People: The Anatomy of a Fatal Crash</h2>
 <p>The flag data allows a closer look at what is actually happening in the crashes that kill people. Looking at all fatal crashes in Philadelphia across the full 20-year dataset, a clear profile emerges.</p>
-<p>Impairment – alcohol or drugs – is a factor in 29% of fatal crashes. Speeding is flagged in 28%. One in three fatal crashes involves a pedestrian. And 15.5% of fatal crashes are hit-and-runs: someone caused a death and then drove away.</p>
-<p>Distracted driving, which gets enormous public attention, appears in just 2% of fatal crashes in this dataset – though that figure is likely an undercount given how hard it is to record after the fact.</p>
-<div id="cell-9" class="cell" data-execution_count="13">
+<p>Impairment, meaning alcohol or drugs, is a factor in 29% of fatal crashes. Speeding is flagged in 28%. One in three fatal crashes involves a pedestrian. And 15.5% of fatal crashes are hit-and-runs: someone caused a death and then drove away.</p>
+<p>Distracted driving, which gets enormous public attention, appears in just 2% of fatal crashes in this dataset, though that figure is likely an undercount given how hard it is to record after the fact.</p>
+<div id="cell-9" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fatal_flags <span class="op">=</span> flag_p[flag_p[<span class="st">'FATAL_COUNT'</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>flag_cols <span class="op">=</span> {</span>
@@ -392,9 +389,9 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <section id="when-and-where-the-patterns-behind-the-numbers" class="level2">
 <h2 class="anchored" data-anchor-id="when-and-where-the-patterns-behind-the-numbers">When and Where: The Patterns Behind the Numbers</h2>
 <p>Crashes in Philadelphia are not random. They cluster in predictable ways.</p>
-<p>The most dangerous hours for total crash volume are the evening rush: 4pm to 6pm accounts for a disproportionate share of the daily total, peaking at 5pm. But fatal crashes show a different pattern – they are overrepresented in late-night and early-morning hours, when speeds are higher and impairment is more common.</p>
-<p>Fridays and Saturdays lead in total crash count, but fatalities are highest on Sundays and Saturdays – consistent with late-night weekend driving patterns.</p>
-<div id="cell-11" class="cell" data-execution_count="14">
+<p>The most dangerous hours for total crash volume are the evening rush: 4pm to 6pm accounts for a disproportionate share of the daily total, peaking at 5pm. But fatal crashes show a different pattern, as they are overrepresented in late-night and early-morning hours, when speeds are higher and impairment is more common.</p>
+<p>Fridays and Saturdays lead in total crash count, but fatalities are highest on Sundays and Saturdays, consistent with late-night weekend driving patterns.</p>
+<div id="cell-11" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hour_data <span class="op">=</span> philly.groupby(<span class="st">'HOUR_OF_DAY'</span>).agg(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    crashes    <span class="op">=</span> (<span class="st">'CRN'</span>,<span class="st">'count'</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    fatalities <span class="op">=</span> (<span class="st">'FATAL_COUNT'</span>,<span class="st">'sum'</span>)</span>
@@ -453,10 +450,10 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>The headline number – total crashes going down – is real. But it tells the wrong story.</p>
+<p>The headline number, total crashes going down, is real. But it tells the wrong story.</p>
 <p>Philadelphia’s roads did not get safer after 2020. They got emptier, and then they got faster, and then they got deadlier. The death rate per crash nearly doubled. Pedestrian fatalities climbed 29%. Hit-and-run crashes hit an all-time high and have not come back down.</p>
 <p>The data also shows that when fatal crashes happen, they are not random bad luck. Nearly one in three involves a pedestrian. Impairment and speeding together appear in almost 30% of deaths each. And 15% of the people who cause fatal crashes in Philadelphia simply drive away.</p>
-<p>Reducing crash totals is a real achievement. But as long as the crashes that remain are more likely to kill – and more likely to involve someone fleeing the scene – the city’s road safety problem is not solved. The number went down. The danger did not.</p>
+<p>Reducing crash totals is a real achievement. But as long as the crashes that remain are more likely to kill, and more likely to involve someone fleeing the scene, the city’s road safety problem is not solved. The number went down. The danger did not.</p>
 
 
 </section>

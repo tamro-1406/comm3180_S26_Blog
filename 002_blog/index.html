@@ -204,8 +204,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="are-you-actually-an-introvert-the-big-five-data-has-thoughts." class="level1">
 <h1>Are You Actually an Introvert? The Big Five Data Has Thoughts.</h1>
 <p>If you spend any time on personality forums or social media, you would think most people are introverted, anxious, and deeply misunderstood. INFP and INTJ are practically aesthetic identities at this point.</p>
-<p>But I got hold of two datasets – 19,719 real Big Five personality test responses from Open Psychometrics, plus an MBTI forum dataset of over 8,600 users – and what the data shows is very different from the online version of personality psychology.</p>
-<p>The Big Five does not put you in a box. It measures five continuous traits – Extraversion, Neuroticism, Openness, Agreeableness, and Conscientiousness – scored 0 to 100. The science behind it is far more robust than the MBTI, which is why psychologists use it. So what do 19,000 real responses actually look like?</p>
+<p>But I got hold of two datasets: 19,719 real Big Five personality test responses from Open Psychometrics, plus an MBTI forum dataset of over 8,600 users, and what the data shows is very different from the online version of personality psychology.</p>
+<p>The Big Five does not put you in a box. It measures five continuous traits: Extraversion, Neuroticism, Openness, Agreeableness, and Conscientiousness, scored 0 to 100. The science behind it is far more robust than the MBTI, which is why psychologists use it. So what do 19,000 real responses actually look like?</p>
 <div id="05fab592-0c46-4007-ab1b-fa7115152bc0" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -237,7 +237,7 @@ Penn COMM 3180 class: 19 students</code></pre>
 </div>
 <section id="the-internet-introvert-problem" class="level2">
 <h2 class="anchored" data-anchor-id="the-internet-introvert-problem">The Internet Introvert Problem</h2>
-<p>Start with the MBTI data – it comes from an online personality forum, so the sample is self-selected. And the bias is stark.</p>
+<p>Start with the MBTI data as it comes from an online personality forum, so the sample is self-selected. And the bias is stark.</p>
 <p>Of the 8,675 users in the dataset, <strong>77% are introverts</strong>. The top three types are INFP (21%), INFJ (17%), and INTP (15%). Extraverted types barely appear.</p>
 <p>This makes sense: introverts are more likely to join communities devoted to discussing personality. But it creates a massive distortion. If your only exposure to personality data is online forums, you would think introversion is the default. The actual data says otherwise.</p>
 <div id="62307efb-61a7-43f7-94c2-219e23de523c" class="cell" data-execution_count="2">
@@ -284,7 +284,7 @@ Penn COMM 3180 class: 19 students</code></pre>
 <section id="what-19000-real-responses-actually-look-like" class="level2">
 <h2 class="anchored" data-anchor-id="what-19000-real-responses-actually-look-like">What 19,000 Real Responses Actually Look Like</h2>
 <p>Now look at the Open Psychometrics Big Five data. Global averages for all five traits cluster between 52 and 58 out of 100. Nobody is dramatically off the charts.</p>
-<p>Conscientiousness scores highest globally at 58. Extraversion and Neuroticism sit right around 52 – the population is nearly split down the middle on both. The one real gender gap is in Neuroticism: women score about 5 points higher than men, the largest consistent difference across all five traits.</p>
+<p>Conscientiousness scores highest globally at 58. Extraversion and Neuroticism sit right around 52, so the population is nearly split down the middle on both. The one real gender gap is in Neuroticism: women score about 5 points higher than men, the largest consistent difference across all five traits.</p>
 <div id="3da5c69f-2b33-46d6-957a-661ef22b1918" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>gd <span class="op">=</span> op[op[<span class="st">'gender'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>])].copy()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gd[<span class="st">'gender_label'</span>] <span class="op">=</span> gd[<span class="st">'gender'</span>].<span class="bu">map</span>({<span class="dv">1</span>: <span class="st">'Male'</span>, <span class="dv">2</span>: <span class="st">'Female'</span>})</span>
@@ -324,8 +324,8 @@ Penn COMM 3180 class: 19 students</code></pre>
 </section>
 <section id="the-older-you-get-the-calmer-you-become" class="level2">
 <h2 class="anchored" data-anchor-id="the-older-you-get-the-calmer-you-become">The Older You Get, The Calmer You Become</h2>
-<p>This was the most striking finding. Neuroticism drops consistently as people age – from around 55 for teenagers to 44 for people in their 50s and 60s. That is an 11-point decline across a lifetime.</p>
-<p>Meanwhile, Openness, Conscientiousness, Agreeableness, and Extraversion barely budge. The one thing that genuinely changes as you get older is how emotionally reactive you are – and it reliably goes down.</p>
+<p>This was the most striking finding. Neuroticism drops consistently as people age, from around 55 for teenagers to 44 for people in their 50s and 60s. That is an 11-point decline across a lifetime.</p>
+<p>Meanwhile, Openness, Conscientiousness, Agreeableness, and Extraversion barely budge. The one thing that genuinely changes as you get older is how emotionally reactive you are, and it reliably goes down.</p>
 <p>If you are 20 and feel more anxious than you would like, the data suggests that is both completely normal and, according to the trajectory of 19,000 people before you, temporary.</p>
 <div id="a22a4d4f-0c92-42c9-a640-ac6135ad1a19" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>op2 <span class="op">=</span> op[op[<span class="st">'age'</span>].between(<span class="dv">15</span>, <span class="dv">65</span>)].copy()</span>
@@ -368,7 +368,7 @@ Penn COMM 3180 class: 19 students</code></pre>
 <section id="how-does-a-penn-comm-class-compare-to-the-world" class="level2">
 <h2 class="anchored" data-anchor-id="how-does-a-penn-comm-class-compare-to-the-world">How Does a Penn Comm Class Compare to the World?</h2>
 <p>Our class of 19 students also took the Big Five. Compared to the global average, the class skews noticeably higher on Extraversion (67.9 vs 51.9) and Openness (66.1 vs 57.8).</p>
-<p>That is not surprising – a communications class at a selective university probably selects for outgoing and curious people. But the spread within the class is wide: nearly 30-point standard deviation on Extraversion. The dots scattered over the class bars below show just how much individual variation hides inside a single average.</p>
+<p>That is not surprising as a class at a selective university probably selects for outgoing and curious people. But the spread within the class is wide: nearly 30-point standard deviation on Extraversion. The dots scattered over the class bars below show just how much individual variation hides inside a single average.</p>
 <div id="c0f64e82-687d-47eb-8fc1-cc31379d9922" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>global_list <span class="op">=</span> [op[t].mean() <span class="cf">for</span> t <span class="kw">in</span> TRAITS]</span>
@@ -416,10 +416,10 @@ Penn COMM 3180 class: 19 students</code></pre>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>The data pushes back against the popular internet version of personality psychology on three fronts.</p>
-<p>The introvert majority is an artifact of who uses personality forums online, not a reflection of the actual population. Globally, Extraversion sits at 52 out of 100 – the population is nearly split down the middle.</p>
+<p>The introvert majority is an artifact of who uses personality forums online, not a reflection of the actual population. Globally, Extraversion sits at 52 out of 100, the population is nearly split down the middle.</p>
 <p>The one personality trait that genuinely shifts over a lifetime is Neuroticism, and it goes down. The emotional reactivity that feels defining in your teens and twenties reliably softens by middle age. Everything else stays largely stable.</p>
-<p>And a Penn communications class is measurably more extraverted and open than the global baseline – by 16 points on Extraversion. Whether that reflects who chooses communications, who gets into Penn, or just the noise of a 19-person sample, the gap is real.</p>
-<p>Personality tests are more interesting when you compare yourself to 19,000 other people rather than to a description on a website. The data does not put you in a box. It puts you on a spectrum – and most people land much closer to the middle than the internet would have you believe.</p>
+<p>And a Penn communications class is measurably more extraverted and open than the global baseline, by 16 points on Extraversion. Whether that reflects who chooses communications, who gets into Penn, or just the noise of a 19-person sample, the gap is real.</p>
+<p>Personality tests are more interesting when you compare yourself to 19,000 other people rather than to a description on a website. The data does not put you in a box. It puts you on a spectrum, and most people land much closer to the middle than the internet would have you believe.</p>
 
 
 </section>
