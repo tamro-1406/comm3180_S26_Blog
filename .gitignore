@@ -174,3 +174,6 @@ posts/09_DOW4_and_Dimensions_of_Data/311calls/req311_2024.csv
 08_DOW4_and_Geolocated_data_with_GeoPandas/data/PDOT_crash_data_2005_2024.csv
 09_DOW4_and_Dimensions_of_Data/311calls/req311_2024.csv
 *.csv
+
+PDOT_crash_data_2005_2024.csv
+*.csv
