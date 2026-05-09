@@ -3,11 +3,11 @@
     "listing": "/index.html",
     "items": [
       "/about.html",
-      "/005_blog/philly_shootings.html",
-      "/004_blog/philly_crashes.html",
-      "/003_blog/winter_olympics.html",
-      "/002_blog/introverts-big5-data.html",
-      "/001_blog/philly_winter_warming.html"
+      "/005_blog/index.html",
+      "/004_blog/index.html",
+      "/003_blog/index.html",
+      "/002_blog/index.html",
+      "/001_blog/index.html"
     ]
   }
 ]
