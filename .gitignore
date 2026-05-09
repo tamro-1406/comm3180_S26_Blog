@@ -163,3 +163,5 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+08_DOW4_and_Geolocated_data_with_GeoPandas/data/PDOT_crash_data_2005_2024.csv
+09_DOW4_and_Dimensions_of_Data/311calls/req311_2024.csv
