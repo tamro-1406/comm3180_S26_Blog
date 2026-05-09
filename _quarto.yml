@@ -3,11 +3,14 @@ project:
 
 website:
   title: "Tarek's Data Stories"
+  listing:
+    contents: posts
   navbar:
     right:
       - about.qmd
       - icon: github
         href: https://github.com/
+
 format:
   html:
     theme: solar
@@ -15,5 +18,5 @@ format:
 
 execute:
   freeze: auto
-
+  
 
