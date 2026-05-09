@@ -180,3 +180,5 @@ PDOT_crash_data_2005_2024.csv
 
 posts/08_DOW4_and_Geolocated_data_with_GeoPandas/data/PDOT_crash_data_2005_2024.csv
 *.csv
+
+*.csv
