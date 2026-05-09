@@ -1,8 +1,10 @@
 ---
-title: About
-image: profile.jpg
+title: "Tarek Amro's Data Stories"
+image: profile.jpeg
 about:
   template: jolla
 ---
 
-About this blog
+Hi, I'm Tarek, a sophomore at the University of Pennsylvania studying Philosophy, Politics, and Economics (PPE). I grew up in New York City with roots in Lebanon, and I'm passionate about finance, politics, history, and the stories data can tell about the world around us.
+
+Outside the classroom I play soccer and tennis, love music, and follow sports and current events closely. This blog is where I explore datasets that catch my interest, from Philadelphia street safety to Olympic medals to personality psychology, and try to find stories from underneath the numbers.
