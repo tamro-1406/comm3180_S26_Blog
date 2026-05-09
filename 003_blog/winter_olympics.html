@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Tarek Amro">
+<meta name="dcterms.date" content="2026-02-22">
+<meta name="description" content="A data story using 100 years of Winter Olympics results to find out what actually predicts medal success – and why Norway makes no sense.">
+
+<title>Size Doesn’t Win Medals. Snow Does. – Tarek's Data Stories</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5a335638c95573c74d3de04ac0781048.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Tarek’s Data Stories</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Size Doesn’t Win Medals. Snow Does.</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">sports</div>
+    <div class="quarto-category">olympics</div>
+    <div class="quarto-category">data</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A data story using 100 years of Winter Olympics results to find out what actually predicts medal success – and why Norway makes no sense.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Tarek Amro </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 22, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="winter_olympics_hero.svg" class="img-fluid figure-img"></p>
+<figcaption>Winter Olympics</figcaption>
+</figure>
+</div>
+<section id="size-doesnt-win-medals.-snow-does." class="level1">
+<h1>Size Doesn’t Win Medals. Snow Does.</h1>
+<p>At first glance, the Winter Olympics looks like a straightforward contest between wealthy, powerful nations. The United States, Canada, Germany, Russia – the countries you’d expect to dominate a global competition.</p>
+<p>But there is a country with a population of 5.5 million people that has quietly accumulated more medals per capita than any other nation in the history of the Winter Games. And when you look at the per-capita numbers, the gap between Norway and everyone else is not close. It is not even the same sport.</p>
+<p>I looked at 100 years of Winter Olympics data – every medal awarded from the first Games in Chamonix in 1924 through Beijing 2022 – to understand what actually separates the great winter sports nations from the rest. The answer is less about size, money, or even athletic infrastructure than you might think.</p>
+<div id="cell-3" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.patches <span class="im">as</span> mpatches</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>medals <span class="op">=</span> pd.read_csv(<span class="st">'winter_olympics_medals.csv'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>bios   <span class="op">=</span> pd.read_csv(<span class="st">'bios.csv'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>pops   <span class="op">=</span> pd.read_csv(<span class="st">'populations.csv'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>medal_df <span class="op">=</span> medals[medals[<span class="st">'medal'</span>].notna()].copy()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total medals awarded (1924-2022): </span><span class="sc">{</span><span class="bu">len</span>(medal_df)<span class="sc">:,}</span><span class="ss">'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Countries that have won at least one medal: </span><span class="sc">{</span>medal_df[<span class="st">"noc"</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Total countries that ever competed: </span><span class="sc">{</span>medals[<span class="st">"noc"</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Disciplines in dataset: </span><span class="sc">{</span>medal_df[<span class="st">"discipline"</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total medals awarded (1924-2022): 7,655
+Countries that have won at least one medal: 57
+Total countries that ever competed: 131
+Disciplines in dataset: 19</code></pre>
+</div>
+</div>
+<section id="the-raw-leaderboard-canada-leads-but-norway-is-the-real-story" class="level2">
+<h2 class="anchored" data-anchor-id="the-raw-leaderboard-canada-leads-but-norway-is-the-real-story">The Raw Leaderboard: Canada Leads, but Norway Is the Real Story</h2>
+<p>In total medal count, Canada leads the all-time Winter Olympics table with 800 medals, just ahead of the United States (787). Norway is third with 603.</p>
+<p>That ranking makes sense on the surface – Canada and the USA are large, wealthy countries with deep sports infrastructure. But raw totals are misleading. Canada has a population of nearly 39 million. Norway has 5.5 million.</p>
+<p>When you adjust for population, the leaderboard looks completely different.</p>
+<div id="cell-5" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>top15_raw <span class="op">=</span> medal_df.groupby(<span class="st">'noc'</span>).size().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">12</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>highlight <span class="op">=</span> {<span class="st">'NOR'</span>: <span class="st">'#d4af37'</span>, <span class="st">'CAN'</span>: <span class="st">'#c0392b'</span>, <span class="st">'USA'</span>: <span class="st">'#2980b9'</span>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>colors_raw <span class="op">=</span> [highlight.get(n, <span class="st">'#95a5a6'</span>) <span class="cf">for</span> n <span class="kw">in</span> top15_raw.index]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax.bar(top15_raw.index, top15_raw.values, color<span class="op">=</span>colors_raw, edgecolor<span class="op">=</span><span class="st">'white'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, noc, val <span class="kw">in</span> <span class="bu">zip</span>(bars, top15_raw.index, top15_raw.values):</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ax.text(bar.get_x() <span class="op">+</span> bar.get_width()<span class="op">/</span><span class="dv">2</span>, bar.get_height() <span class="op">+</span> <span class="dv">8</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">str</span>(val), ha<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">9</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span>highlight.get(noc, <span class="st">'#555'</span>))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">'Norway: 5.5M people,</span><span class="ch">\n</span><span class="st">603 medals'</span>, xy<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">603</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            xytext<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">650</span>), fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span><span class="st">'#d4af37'</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>            arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#d4af37'</span>))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>legend_handles <span class="op">=</span> [</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#c0392b'</span>, label<span class="op">=</span><span class="st">'Canada (pop. 39M)'</span>),</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#2980b9'</span>, label<span class="op">=</span><span class="st">'USA (pop. 333M)'</span>),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#d4af37'</span>, label<span class="op">=</span><span class="st">'Norway (pop. 5.5M)'</span>),</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>ax.legend(handles<span class="op">=</span>legend_handles, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Total medals (1924-2022)'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'All-Time Winter Olympics Medal Count: Top 12 Countries'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">900</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="winter_olympics_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="per-capita-norway-is-not-just-better.-its-on-another-planet." class="level2">
+<h2 class="anchored" data-anchor-id="per-capita-norway-is-not-just-better.-its-on-another-planet.">Per Capita: Norway Is Not Just Better. It’s on Another Planet.</h2>
+<p>When you divide total medals by population, Norway scores 110.5 medals per million people. Finland is second at 92.9. The United States, despite its raw total of 787 medals, scores just 2.4 per million.</p>
+<p>To put that in perspective: Norway has won roughly <strong>46 times more medals per person</strong> than the United States. That is not a competitive gap – that is a different relationship with winter sport entirely.</p>
+<p>The pattern is clear: the top per-capita countries are all small, cold, northern European nations where skiing and skating are not sports – they are transportation, culture, and childhood. Norway, Finland, Sweden, and Austria dominate this list not because they have better funding, but because winter sport is embedded in their national identity in a way it simply is not elsewhere.</p>
+<div id="cell-7" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pops_2022 <span class="op">=</span> pops[[<span class="st">'Country Name'</span>, <span class="st">'Country Code'</span>, <span class="st">'2022'</span>]].copy()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pops_2022.columns <span class="op">=</span> [<span class="st">'country'</span>, <span class="st">'code'</span>, <span class="st">'pop2022'</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>total_medals <span class="op">=</span> medal_df.groupby(<span class="st">'noc'</span>).size().reset_index(name<span class="op">=</span><span class="st">'total_medals'</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> total_medals.merge(pops_2022, left_on<span class="op">=</span><span class="st">'noc'</span>, right_on<span class="op">=</span><span class="st">'code'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>merged[<span class="st">'medals_per_million'</span>] <span class="op">=</span> merged[<span class="st">'total_medals'</span>] <span class="op">/</span> (merged[<span class="st">'pop2022'</span>] <span class="op">/</span> <span class="fl">1e6</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> merged.dropna(subset<span class="op">=</span>[<span class="st">'pop2022'</span>])</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>merged <span class="op">=</span> merged[merged[<span class="st">'pop2022'</span>] <span class="op">&gt;</span> <span class="dv">500000</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>top_pc <span class="op">=</span> merged.sort_values(<span class="st">'medals_per_million'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>colors_pc <span class="op">=</span> [<span class="st">'#d4af37'</span> <span class="cf">if</span> n <span class="op">==</span> <span class="st">'NOR'</span> <span class="cf">else</span> <span class="st">'#4a7ab5'</span> <span class="cf">for</span> n <span class="kw">in</span> top_pc[<span class="st">'noc'</span>]]</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>bars <span class="op">=</span> ax.barh(top_pc[<span class="st">'noc'</span>][::<span class="op">-</span><span class="dv">1</span>], top_pc[<span class="st">'medals_per_million'</span>][::<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>               color<span class="op">=</span>colors_pc[::<span class="op">-</span><span class="dv">1</span>], edgecolor<span class="op">=</span><span class="st">'white'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bar, val <span class="kw">in</span> <span class="bu">zip</span>(bars, top_pc[<span class="st">'medals_per_million'</span>][::<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    ax.text(bar.get_width() <span class="op">+</span> <span class="dv">1</span>, bar.get_y() <span class="op">+</span> bar.get_height()<span class="op">/</span><span class="dv">2</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'</span><span class="sc">{</span>val<span class="sc">:.1f}</span><span class="ss">'</span>, va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">9</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>ax.axvline(merged[merged[<span class="st">'noc'</span>]<span class="op">==</span><span class="st">'USA'</span>][<span class="st">'medals_per_million'</span>].values[<span class="dv">0</span>],</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>           color<span class="op">=</span><span class="st">'#c0392b'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="fl">1.2</span>, label<span class="op">=</span><span class="st">'USA (2.4)'</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Medals per million people (2022 population)'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Winter Olympics Medals Per Capita: Top 10 Countries (pop. &gt; 500k)'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>ax.legend(fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="winter_olympics_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-norway-actually-wins-a-master-class-in-cross-country" class="level2">
+<h2 class="anchored" data-anchor-id="what-norway-actually-wins-a-master-class-in-cross-country">What Norway Actually Wins: A Master Class in Cross-Country</h2>
+<p>Norway’s dominance is not spread evenly. It is highly concentrated in a small number of disciplines – most of which involve skiing across long distances in freezing temperatures.</p>
+<p>Cross-Country Skiing alone accounts for 227 of Norway’s 603 medals – more than a third of the entire haul. Add Biathlon, Nordic Combined, and Ski Jumping and you account for over 400 medals. Norway essentially built its Olympic dynasty on disciplines that require enduring cold and skiing uphill for extended periods.</p>
+<p>The United States, by contrast, dominates in Ice Hockey, Speed Skating, and the freestyle and board sports that were added to the program after 1990. Different climates produce different champions.</p>
+<div id="cell-9" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nor_disc <span class="op">=</span> medal_df[medal_df[<span class="st">'noc'</span>]<span class="op">==</span><span class="st">'NOR'</span>].groupby(<span class="st">'discipline'</span>).size().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">8</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>usa_disc <span class="op">=</span> medal_df[medal_df[<span class="st">'noc'</span>]<span class="op">==</span><span class="st">'USA'</span>].groupby(<span class="st">'discipline'</span>).size().sort_values(ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">8</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_disc(name):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> name.split(<span class="st">'('</span>)[<span class="dv">0</span>].strip()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>nor_labels <span class="op">=</span> [clean_disc(d) <span class="cf">for</span> d <span class="kw">in</span> nor_disc.index]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>usa_labels <span class="op">=</span> [clean_disc(d) <span class="cf">for</span> d <span class="kw">in</span> usa_disc.index]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].barh(nor_labels[::<span class="op">-</span><span class="dv">1</span>], nor_disc.values[::<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">'#d4af37'</span>, edgecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Norway: medals by discipline'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'Total medals'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(nor_disc.values[::<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">0</span>].text(v <span class="op">+</span> <span class="dv">2</span>, i, <span class="bu">str</span>(v), va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].barh(usa_labels[::<span class="op">-</span><span class="dv">1</span>], usa_disc.values[::<span class="op">-</span><span class="dv">1</span>], color<span class="op">=</span><span class="st">'#2980b9'</span>, edgecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'USA: medals by discipline'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'Total medals'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(usa_disc.values[::<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].text(v <span class="op">+</span> <span class="dv">2</span>, i, <span class="bu">str</span>(v), va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'Two Very Different Paths to the Podium'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="winter_olympics_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-twist-the-games-have-changed-and-the-map-is-spreading" class="level2">
+<h2 class="anchored" data-anchor-id="the-twist-the-games-have-changed-and-the-map-is-spreading">The Twist: The Games Have Changed, and the Map Is Spreading</h2>
+<p>Here is something the overall totals hide. The Winter Olympics in 1924 awarded 109 medals across 8 disciplines. By 2022, that number was 642 across 15 disciplines – nearly six times as many medals per Games.</p>
+<p>More events means more chances for smaller nations to win. And the newer disciplines – Snowboarding, Freestyle Skiing, Short Track Speed Skating – draw from a completely different athlete pool than the traditional Nordic events that built Norway’s dynasty.</p>
+<p>Ten countries won their first-ever Winter Olympics medal after 2018. Some, like Georgia and Colombia, had never appeared on a winter medals table before. The world of winter sport is genuinely expanding – just slowly.</p>
+<div id="cell-11" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>medals_by_year <span class="op">=</span> medal_df.groupby(<span class="st">'year'</span>).size()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>countries_by_year <span class="op">=</span> medal_df.groupby(<span class="st">'year'</span>)[<span class="st">'noc'</span>].nunique()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> medals_by_year.index</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="dv">5</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax1.fill_between(years, medals_by_year.values, alpha<span class="op">=</span><span class="fl">0.3</span>, color<span class="op">=</span><span class="st">'#2980b9'</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax1.plot(years, medals_by_year.values, color<span class="op">=</span><span class="st">'#2980b9'</span>, linewidth<span class="op">=</span><span class="fl">2.2</span>, marker<span class="op">=</span><span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">4</span>, label<span class="op">=</span><span class="st">'Total medals'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ax2.plot(years, countries_by_year.values, color<span class="op">=</span><span class="st">'#d4af37'</span>, linewidth<span class="op">=</span><span class="fl">2.2</span>, marker<span class="op">=</span><span class="st">'s'</span>, markersize<span class="op">=</span><span class="dv">4</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Countries winning medals'</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>ax1.annotate(<span class="st">'Chamonix 1924</span><span class="ch">\n</span><span class="st">109 medals, 10 countries'</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>             xy<span class="op">=</span>(<span class="dv">1924</span>, <span class="dv">109</span>), xytext<span class="op">=</span>(<span class="dv">1932</span>, <span class="dv">220</span>),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>             fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span><span class="st">'#2980b9'</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>             arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#2980b9'</span>))</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>ax1.annotate(<span class="st">'Beijing 2022</span><span class="ch">\n</span><span class="st">642 medals, 29 countries'</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>             xy<span class="op">=</span>(<span class="dv">2022</span>, <span class="dv">642</span>), xytext<span class="op">=</span>(<span class="dv">2005</span>, <span class="dv">560</span>),</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>             fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span><span class="st">'#2980b9'</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>             arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">'-&gt;'</span>, color<span class="op">=</span><span class="st">'#2980b9'</span>))</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>ax1.set_xlabel(<span class="st">'Year'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>ax1.set_ylabel(<span class="st">'Total medals awarded'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">'#2980b9'</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">'Countries winning medals'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">'#d4af37'</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Growth of the Winter Olympics: Medals and Nations on the Podium (1924-2022)'</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>              fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>lines1, labels1 <span class="op">=</span> ax1.get_legend_handles_labels()</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>lines2, labels2 <span class="op">=</span> ax2.get_legend_handles_labels()</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>ax1.legend(lines1 <span class="op">+</span> lines2, labels1 <span class="op">+</span> labels2, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="winter_olympics_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-athletes-young-old-and-extraordinary" class="level2">
+<h2 class="anchored" data-anchor-id="the-athletes-young-old-and-extraordinary">The Athletes: Young, Old, and Extraordinary</h2>
+<p>The data in the athlete bios adds one more layer. The average age at the time of winning a Winter Olympics medal is 26. But the range is extraordinary.</p>
+<p>The youngest gold medalist in this dataset is Kim Yun-Mi of South Korea, who won in Short Track Speed Skating at the 1994 Lillehammer Games at just 14 years old. At the other extreme, Robin Welsh of Great Britain won a Curling gold at the 1924 Games at age 55 – a reminder that the original Winter Olympics included disciplines that looked very different from today’s high-speed events.</p>
+<p>And the most decorated winter Olympian of all time? Marit Bjørgen of Norway, with 15 medals across five Games. Of course it is a Norwegian.</p>
+<div id="cell-13" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bios[<span class="st">'born_date'</span>] <span class="op">=</span> pd.to_datetime(bios[<span class="st">'born_date'</span>], errors<span class="op">=</span><span class="st">'coerce'</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>medal_bios <span class="op">=</span> medal_df.merge(bios[[<span class="st">'athlete_id'</span>, <span class="st">'born_date'</span>]], on<span class="op">=</span><span class="st">'athlete_id'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>medal_bios[<span class="st">'approx_age'</span>] <span class="op">=</span> medal_bios[<span class="st">'year'</span>] <span class="op">-</span> medal_bios[<span class="st">'born_date'</span>].dt.year</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>medal_bios_clean <span class="op">=</span> medal_bios[(medal_bios[<span class="st">'approx_age'</span>] <span class="op">&gt;=</span> <span class="dv">14</span>) <span class="op">&amp;</span> (medal_bios[<span class="st">'approx_age'</span>] <span class="op">&lt;=</span> <span class="dv">60</span>)]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>athlete_medals <span class="op">=</span> medal_df.groupby([<span class="st">'athlete_id'</span>, <span class="st">'as'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'total'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>top_athletes <span class="op">=</span> athlete_medals.sort_values(<span class="st">'total'</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">8</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].hist(medal_bios_clean[<span class="st">'approx_age'</span>], bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">14</span>, <span class="dv">61</span>, <span class="dv">2</span>),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>             color<span class="op">=</span><span class="st">'#4a7ab5'</span>, edgecolor<span class="op">=</span><span class="st">'white'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axvline(medal_bios_clean[<span class="st">'approx_age'</span>].mean(), color<span class="op">=</span><span class="st">'#d4af37'</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f'Mean: </span><span class="sc">{</span>medal_bios_clean[<span class="st">"approx_age"</span>]<span class="sc">.</span>mean()<span class="sc">:.1f}</span><span class="ss"> yrs'</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axvline(<span class="dv">14</span>, color<span class="op">=</span><span class="st">'#c0392b'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Youngest gold: 14 (Kim Yun-Mi, 1994)'</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axvline(<span class="dv">55</span>, color<span class="op">=</span><span class="st">'#27ae60'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Oldest gold: 55 (Robin Welsh, 1924)'</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'Age at time of medal'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'Number of medals'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Age distribution of Winter Olympics medalists'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>nor_athletes <span class="op">=</span> top_athletes.head(<span class="dv">8</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>bar_colors <span class="op">=</span> [<span class="st">'#d4af37'</span> <span class="cf">if</span> <span class="st">'Bj'</span> <span class="kw">in</span> name <span class="kw">or</span> <span class="st">'Dæhlie'</span> <span class="kw">in</span> name <span class="kw">or</span> <span class="st">'Kalla'</span> <span class="kw">in</span> name <span class="kw">or</span> <span class="st">'Bø'</span> <span class="kw">in</span> name</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>              <span class="cf">else</span> <span class="st">'#4a7ab5'</span> <span class="cf">for</span> name <span class="kw">in</span> nor_athletes[<span class="st">'as'</span>]]</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].barh(nor_athletes[<span class="st">'as'</span>][::<span class="op">-</span><span class="dv">1</span>], nor_athletes[<span class="st">'total'</span>][::<span class="op">-</span><span class="dv">1</span>],</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>             color<span class="op">=</span>bar_colors[::<span class="op">-</span><span class="dv">1</span>], edgecolor<span class="op">=</span><span class="st">'white'</span>)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'Total medals'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Most decorated Winter Olympians (all-time)'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, v <span class="kw">in</span> <span class="bu">enumerate</span>(nor_athletes[<span class="st">'total'</span>][::<span class="op">-</span><span class="dv">1</span>]):</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    axes[<span class="dv">1</span>].text(v <span class="op">+</span> <span class="fl">0.1</span>, i, <span class="bu">str</span>(v), va<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(handles<span class="op">=</span>[</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#d4af37'</span>, label<span class="op">=</span><span class="st">'Norwegian athletes'</span>),</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    mpatches.Patch(color<span class="op">=</span><span class="st">'#4a7ab5'</span>, label<span class="op">=</span><span class="st">'Other countries'</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>], fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="winter_olympics_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>One hundred years of Winter Olympics data tells a story that cuts against the idea that size and resources determine success.</p>
+<p>Canada and the United States top the raw medal table, but they are large countries with enormous athletic budgets. The per-capita leaders – Norway, Finland, Sweden, Austria – are small, cold nations where winter sport is not a funded program, it is a way of life.</p>
+<p>Norway’s 110.5 medals per million people is not the product of a superior sports system. It is the product of a country where children grow up skiing to school and cross-country trails are national infrastructure. You cannot manufacture that with money.</p>
+<p>The games are expanding – 2022 awarded nearly six times as many medals as 1924, and more countries than ever are reaching the podium. But the small, cold countries at the top of the per-capita table have not loosened their grip. Until the rest of the world starts skiing to school, they probably will not.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tamro-1406\.github\.io\/comm3180_S26_Blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
