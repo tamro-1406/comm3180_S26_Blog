@@ -1,6 +1,0 @@
---2026-03-02 11:36:17--  https://phl.carto.com/api/v2/sql?filename=public_cases_fc
-Resolving phl.carto.com (phl.carto.com)... 35.222.16.111
-Connecting to phl.carto.com (phl.carto.com)|35.222.16.111|:443... connected.
-HTTP request sent, awaiting response... 400 Bad Request
-2026-03-02 11:36:18 ERROR 400: Bad Request.
-
