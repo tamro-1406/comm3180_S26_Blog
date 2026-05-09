@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Punxsutawney Phil vs.&nbsp;Philadelphia: Does the Groundhog Actually Know Anything? – Tarek's Data Stories</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-5a335638c95573c74d3de04ac0781048.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Tarek’s Data Stories</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Punxsutawney Phil vs.&nbsp;Philadelphia: Does the Groundhog Actually Know Anything?</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Every February 2, a groundhog called Puxsutawney Phil in Pennsylvania tells us one of two things:</p>
+<ul>
+<li>❄️ <strong>More winter</strong> (he saw his shadow)</li>
+<li>🌼 <strong>Early spring</strong> (no shadow)</li>
+</ul>
+<p>So I wanted to test the legend using <strong>daily Philadelphia weather from 2005–2025</strong>.</p>
+<section id="my-questions" class="level3">
+<h3 class="anchored" data-anchor-id="my-questions">My questions</h3>
+<p>I’m looking specifically at the <strong>six weeks after Groundhog Day</strong> (Feb 2 → ~mid-March):</p>
+<ol type="1">
+<li>What is the <em>typical</em> weather like in Philly during those six weeks?</li>
+<li>Do temperature patterns look different in “more winter” vs “early spring” years?</li>
+<li>Do “early spring” years warm up faster?</li>
+<li>How much does late-winter weather vary year to year anyway?</li>
+<li>Overall… is Phil’s prediction meaningfully related to actual Philly weather?</li>
+</ol>
+<div id="65dbfb93-bdd4-4c23-99bc-92fb8d086f28" class="cell" data-execution_count="35">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>weather_df <span class="op">=</span> pd.read_csv(<span class="st">'data/philadelphia_weather_2005_to_2025.csv'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>weather_df[<span class="st">'date'</span>] <span class="op">=</span> pd.to_datetime(weather_df[<span class="st">'date'</span>])</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>weather_df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">FileNotFoundError</span>                         Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[35]</span><span class="ansi-green-fg">, line 5</span>
+<span class="ansi-green-fg">      2</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">numpy</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">np</span>
+<span class="ansi-green-fg">      3</span> <span style="font-weight:bold;color:rgb(0,135,0)">import</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">matplotlib</span><span class="ansi-blue-fg ansi-bold">.</span><span class="ansi-blue-fg ansi-bold">pyplot</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">as</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">plt</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">5</span> weather_df = <span class="ansi-yellow-bg">pd</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">read_csv</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-fg ansi-yellow-bg">data/philadelphia_weather_2005_to_2025.csv</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">      6</span> weather_df[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">date</span><span class="ansi-yellow-fg">'</span>] = pd.to_datetime(weather_df[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">date</span><span class="ansi-yellow-fg">'</span>])
+<span class="ansi-green-fg">      8</span> weather_df.head()
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/jupyterhub/share/jupyter/venv/python3_comm3180/lib/python3.12/site-packages/pandas/io/parsers/readers.py:873</span>, in <span class="ansi-cyan-fg">read_csv</span><span class="ansi-blue-fg">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, skip_blank_lines, parse_dates, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="ansi-green-fg">    861</span> kwds_defaults = _refine_defaults_read(
+<span class="ansi-green-fg">    862</span>     dialect,
+<span class="ansi-green-fg">    863</span>     delimiter,
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">    869</span>     dtype_backend=dtype_backend,
+<span class="ansi-green-fg">    870</span> )
+<span class="ansi-green-fg">    871</span> kwds.update(kwds_defaults)
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">873</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">_read</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">filepath_or_buffer</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">kwds</span><span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/jupyterhub/share/jupyter/venv/python3_comm3180/lib/python3.12/site-packages/pandas/io/parsers/readers.py:300</span>, in <span class="ansi-cyan-fg">_read</span><span class="ansi-blue-fg">(filepath_or_buffer, kwds)</span>
+<span class="ansi-green-fg">    297</span> _validate_names(kwds.get(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">names</span><span class="ansi-yellow-fg">"</span>, <span style="font-weight:bold;color:rgb(0,135,0)">None</span>))
+<span class="ansi-green-fg">    299</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create the parser.</span>
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">300</span> parser = <span class="ansi-yellow-bg">TextFileReader</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">filepath_or_buffer</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwds</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    302</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> chunksize <span style="font-weight:bold;color:rgb(175,0,255)">or</span> iterator:
+<span class="ansi-green-fg">    303</span>     <span style="font-weight:bold;color:rgb(0,135,0)">return</span> parser
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/jupyterhub/share/jupyter/venv/python3_comm3180/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1645</span>, in <span class="ansi-cyan-fg">TextFileReader.__init__</span><span class="ansi-blue-fg">(self, f, engine, **kwds)</span>
+<span class="ansi-green-fg">   1642</span>     <span style="color:rgb(0,135,0)">self</span>.options[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">has_index_names</span><span class="ansi-yellow-fg">"</span>] = kwds[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">has_index_names</span><span class="ansi-yellow-fg">"</span>]
+<span class="ansi-green-fg">   1644</span> <span style="color:rgb(0,135,0)">self</span>.handles: IOHandles | <span style="font-weight:bold;color:rgb(0,135,0)">None</span> = <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1645</span> <span style="color:rgb(0,135,0)">self</span>._engine = <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">_make_engine</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">engine</span><span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/jupyterhub/share/jupyter/venv/python3_comm3180/lib/python3.12/site-packages/pandas/io/parsers/readers.py:1904</span>, in <span class="ansi-cyan-fg">TextFileReader._make_engine</span><span class="ansi-blue-fg">(self, f, engine)</span>
+<span class="ansi-green-fg">   1902</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">b</span><span class="ansi-yellow-fg">"</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> mode:
+<span class="ansi-green-fg">   1903</span>         mode += <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">b</span><span class="ansi-yellow-fg">"</span>
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">1904</span> <span style="color:rgb(0,135,0)">self</span>.handles = <span class="ansi-yellow-bg">get_handle</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg">   1905</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1906</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">mode</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1907</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">encoding</span><span class="ansi-yellow-bg">=</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">options</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">get</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">encoding</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">None</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1908</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">compression</span><span class="ansi-yellow-bg">=</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">options</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">get</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">compression</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">None</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1909</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">memory_map</span><span class="ansi-yellow-bg">=</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">options</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">get</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">memory_map</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1910</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">is_text</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">is_text</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1911</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">errors</span><span class="ansi-yellow-bg">=</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">options</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">get</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">encoding_errors</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">strict</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1912</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">storage_options</span><span class="ansi-yellow-bg">=</span><span style="color:rgb(0,135,0)" class="ansi-yellow-bg">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">options</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">get</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">storage_options</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">None</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">   1913</span> <span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   1914</span> <span style="font-weight:bold;color:rgb(0,135,0)">assert</span> <span style="color:rgb(0,135,0)">self</span>.handles <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(0,135,0)">None</span>
+<span class="ansi-green-fg">   1915</span> f = <span style="color:rgb(0,135,0)">self</span>.handles.handle
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/jupyterhub/share/jupyter/venv/python3_comm3180/lib/python3.12/site-packages/pandas/io/common.py:881</span>, in <span class="ansi-cyan-fg">get_handle</span><span class="ansi-blue-fg">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="ansi-green-fg">    876</span> <span style="font-weight:bold;color:rgb(0,135,0)">elif</span> <span style="color:rgb(0,135,0)">isinstance</span>(handle, <span style="color:rgb(0,135,0)">str</span>):
+<span class="ansi-green-fg">    877</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Check whether the filename is to be opened in binary mode.</span>
+<span class="ansi-green-fg">    878</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Binary mode does not support 'encoding' and 'newline'.</span>
+<span class="ansi-green-fg">    879</span>     <span style="font-weight:bold;color:rgb(0,135,0)">if</span> ioargs.encoding <span style="font-weight:bold;color:rgb(175,0,255)">and</span> <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">b</span><span class="ansi-yellow-fg">"</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> ioargs.mode:
+<span class="ansi-green-fg">    880</span>         <span style="font-style:italic;color:rgb(95,135,135)"># Encoding</span>
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">881</span>         handle = <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">open</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-fg">    882</span> <span class="ansi-yellow-bg">            </span><span class="ansi-yellow-bg">handle</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    883</span> <span class="ansi-yellow-bg">            </span><span class="ansi-yellow-bg">ioargs</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">mode</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    884</span> <span class="ansi-yellow-bg">            </span><span class="ansi-yellow-bg">encoding</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">ioargs</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">encoding</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    885</span> <span class="ansi-yellow-bg">            </span><span class="ansi-yellow-bg">errors</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">errors</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    886</span> <span class="ansi-yellow-bg">            </span><span class="ansi-yellow-bg">newline</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-fg ansi-yellow-bg">"</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-fg">    887</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    888</span>     <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg">    889</span>         <span style="font-style:italic;color:rgb(95,135,135)"># Binary mode</span>
+<span class="ansi-green-fg">    890</span>         handle = <span style="color:rgb(0,135,0)">open</span>(handle, ioargs.mode)
+
+<span class="ansi-red-fg">FileNotFoundError</span>: [Errno 2] No such file or directory: 'data/philadelphia_weather_2005_to_2025.csv'</pre>
+</div>
+</div>
+</div>
+<div id="239e5a36-fd74-47c8-92b8-12988039a5d0" class="cell" data-execution_count="34">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"User-Agent"</span>: <span class="st">"Mozilla/5.0"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://www.groundhog.org/groundhog-day/history-past-predictions/"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>tables <span class="op">=</span> pd.read_html(url, storage_options<span class="op">=</span>headers)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>predict_df <span class="op">=</span> tables[<span class="dv">0</span>].copy()</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>predict_df <span class="op">=</span> predict_df.rename(columns<span class="op">=</span>{<span class="st">"Year"</span>:<span class="st">"year"</span>, <span class="st">"Prediction"</span>:<span class="st">"prediction_raw"</span>})</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep 2005–2025 only</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>predict_df <span class="op">=</span> predict_df.query(<span class="st">"year &gt;= 2005 and year &lt;= 2025"</span>).copy()</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean into simple labels</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clean_pred(x):</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="bu">str</span>(x)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"More winter"</span> <span class="kw">in</span> x:</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"More winter"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"Early spring"</span> <span class="kw">in</span> x:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Early spring"</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"Other/None"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>predict_df[<span class="st">"prediction"</span>] <span class="op">=</span> predict_df[<span class="st">"prediction_raw"</span>].<span class="bu">apply</span>(clean_pred)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>predict_df[<span class="st">"prediction"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<pre><code>prediction
+More winter     14
+Early spring     7
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="defining-six-weeks-after-groundhog-day" class="level2">
+<h2 class="anchored" data-anchor-id="defining-six-weeks-after-groundhog-day">Defining “six weeks after Groundhog Day”</h2>
+<p>Phil’s prediction is about what happens next, so I’m focusing on the period starting February 2, all the way through the next 6 weeks.</p>
+<p>That window matters because it’s when we feel winter dragging on or not.</p>
+</section>
+<section id="q1-whats-the-typical-philly-weather-in-the-6-weeks-after-feb-2" class="level2">
+<h2 class="anchored" data-anchor-id="q1-whats-the-typical-philly-weather-in-the-6-weeks-after-feb-2">Q1) What’s the typical Philly weather in the 6 weeks after Feb 2?</h2>
+<p>This is the part where Philly <em>can’t decide what it wants to be</em>.</p>
+<p>Instead of picking one day, I looked at the whole February to mid-March window across 21 years and summarized:</p>
+<ul>
+<li><strong>Daily highs and lows</strong> (how warm/cold it feels)</li>
+<li><strong>Rain and snow</strong> (how messy it gets)</li>
+</ul>
+<div id="56b7cd16-2b86-4680-b5b1-15d72b689efd" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build a Feb 2 date for every year in the dataset</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ghday <span class="op">=</span> pd.to_datetime(<span class="bu">dict</span>(year<span class="op">=</span>weather_df[<span class="st">"date"</span>].dt.year, month<span class="op">=</span><span class="dv">2</span>, day<span class="op">=</span><span class="dv">2</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>winter_end <span class="op">=</span> ghday <span class="op">+</span> pd.Timedelta(weeks<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>winter_filter <span class="op">=</span> (weather_df[<span class="st">"date"</span>] <span class="op">&gt;=</span> ghday) <span class="op">&amp;</span> (weather_df[<span class="st">"date"</span>] <span class="op">&lt;=</span> winter_end)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>winter_weather <span class="op">=</span> weather_df.loc[winter_filter].copy()</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Q1: "Typical" weather over all years in that window</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>typical <span class="op">=</span> winter_weather[[<span class="st">"high"</span>,<span class="st">"low"</span>,<span class="st">"rain"</span>,<span class="st">"snow"</span>]].describe().<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>typical</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[27]</span><span class="ansi-green-fg">, line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Build a Feb 2 date for every year in the dataset</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">2</span> ghday = pd.to_datetime(<span style="color:rgb(0,135,0)">dict</span>(year=<span class="ansi-yellow-bg">weather_df</span>[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">date</span><span class="ansi-yellow-fg">"</span>].dt.year, month=<span class="ansi-green-fg">2</span>, day=<span class="ansi-green-fg">2</span>))
+<span class="ansi-green-fg">      3</span> winter_end = ghday + pd.Timedelta(weeks=<span class="ansi-green-fg">6</span>)
+<span class="ansi-green-fg">      5</span> winter_filter = (weather_df[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">date</span><span class="ansi-yellow-fg">"</span>] &gt;= ghday) &amp; (weather_df[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">date</span><span class="ansi-yellow-fg">"</span>] &lt;= winter_end)
+
+<span class="ansi-red-fg">NameError</span>: name 'weather_df' is not defined</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="q2-more-winter-vs-early-spring-do-the-temperature-patterns-differ" class="level2">
+<h2 class="anchored" data-anchor-id="q2-more-winter-vs-early-spring-do-the-temperature-patterns-differ">Q2) “More winter” vs “Early spring”: do the temperature patterns differ?</h2>
+<p>To test Phil’s actual claim, I grouped years by his prediction and compared what Philly weather did in the six-week window.</p>
+<ul>
+<li>If “Early spring” years are truly different, their temperatures should sit higher.</li>
+<li>If the boxes overlap heavily, then unfortunately the groundhog may be wrong.</li>
+</ul>
+<div id="2b31c1c2-96d3-4d94-9dc3-373f1eef7b93" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>winter_yearly <span class="op">=</span> (</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    winter_weather</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"year"</span>)[[<span class="st">"high"</span>,<span class="st">"low"</span>,<span class="st">"rain"</span>,<span class="st">"snow"</span>]]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    .agg({</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"high"</span>:[np.mean, np.<span class="bu">min</span>, np.<span class="bu">max</span>],</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"low"</span>:[np.mean, np.<span class="bu">min</span>, np.<span class="bu">max</span>],</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rain"</span>:[np.<span class="bu">sum</span>],</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"snow"</span>:[np.<span class="bu">sum</span>]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>winter_yearly.columns <span class="op">=</span> [<span class="st">"_"</span>.join([c[<span class="dv">0</span>], c[<span class="dv">1</span>]]) <span class="cf">for</span> c <span class="kw">in</span> winter_yearly.columns]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>winter_yearly <span class="op">=</span> winter_yearly.reset_index()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[28]</span><span class="ansi-green-fg">, line 2</span>
+<span class="ansi-green-fg">      1</span> winter_yearly = (
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">2</span>     <span class="ansi-yellow-bg">winter_weather</span>
+<span class="ansi-green-fg">      3</span>     .groupby(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">year</span><span class="ansi-yellow-fg">"</span>)[[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">high</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">low</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">rain</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">snow</span><span class="ansi-yellow-fg">"</span>]]
+<span class="ansi-green-fg">      4</span>     .agg({
+<span class="ansi-green-fg">      5</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">high</span><span class="ansi-yellow-fg">"</span>:[np.mean, np.min, np.max],
+<span class="ansi-green-fg">      6</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">low</span><span class="ansi-yellow-fg">"</span>:[np.mean, np.min, np.max],
+<span class="ansi-green-fg">      7</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">rain</span><span class="ansi-yellow-fg">"</span>:[np.sum],
+<span class="ansi-green-fg">      8</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">snow</span><span class="ansi-yellow-fg">"</span>:[np.sum]
+<span class="ansi-green-fg">      9</span>     })
+<span class="ansi-green-fg">     10</span> )
+<span class="ansi-green-fg">     11</span> winter_yearly.columns = [<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">_</span><span class="ansi-yellow-fg">"</span>.join([c[<span class="ansi-green-fg">0</span>], c[<span class="ansi-green-fg">1</span>]]) <span style="font-weight:bold;color:rgb(0,135,0)">for</span> c <span style="font-weight:bold;color:rgb(175,0,255)">in</span> winter_yearly.columns]
+<span class="ansi-green-fg">     12</span> winter_yearly = winter_yearly.reset_index()
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_weather' is not defined</pre>
+</div>
+</div>
+</div>
+<div id="7943746e-0b7c-4060-b278-ec540ec54d4f" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge predictions with yearly weather summary</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>winter_merged <span class="op">=</span> winter_yearly.merge(predict_df[[<span class="st">"year"</span>,<span class="st">"prediction"</span>]], on<span class="op">=</span><span class="st">"year"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>winter_merged[<span class="st">"prediction"</span>].value_counts()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[29]</span><span class="ansi-green-fg">, line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Merge predictions with yearly weather summary</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">2</span> winter_merged = <span class="ansi-yellow-bg">winter_yearly</span>.merge(predict_df[[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">year</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">prediction</span><span class="ansi-yellow-fg">"</span>]], on=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">year</span><span class="ansi-yellow-fg">"</span>, how=<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">inner</span><span class="ansi-yellow-fg">"</span>)
+<span class="ansi-green-fg">      3</span> winter_merged[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">prediction</span><span class="ansi-yellow-fg">"</span>].value_counts()
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_yearly' is not defined</pre>
+</div>
+</div>
+</div>
+<div id="1476b25a-c174-4da0-b4fa-cee802e9cbcf" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare group means (Q2)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>group_summary <span class="op">=</span> (</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    winter_merged</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"prediction"</span>)[[<span class="st">"high_mean"</span>,<span class="st">"low_mean"</span>,<span class="st">"rain_sum"</span>,<span class="st">"snow_sum"</span>]]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>group_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[30]</span><span class="ansi-green-fg">, line 3</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Compare group means (Q2)</span>
+<span class="ansi-green-fg">      2</span> group_summary = (
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">3</span>     <span class="ansi-yellow-bg">winter_merged</span>
+<span class="ansi-green-fg">      4</span>     .groupby(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">prediction</span><span class="ansi-yellow-fg">"</span>)[[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">high_mean</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">low_mean</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">rain_sum</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">snow_sum</span><span class="ansi-yellow-fg">"</span>]]
+<span class="ansi-green-fg">      5</span>     .mean()
+<span class="ansi-green-fg">      6</span>     .round(<span class="ansi-green-fg">2</span>)
+<span class="ansi-green-fg">      7</span> )
+<span class="ansi-green-fg">      9</span> group_summary
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_merged' is not defined</pre>
+</div>
+</div>
+</div>
+<div id="14c1f9f1-ce0e-408b-8847-b72b58f9c77a" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot of average lows by prediction group</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>groups <span class="op">=</span> [<span class="st">"More winter"</span>, <span class="st">"Early spring"</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [winter_merged.loc[winter_merged[<span class="st">"prediction"</span>]<span class="op">==</span>g, <span class="st">"low_mean"</span>] <span class="cf">for</span> g <span class="kw">in</span> groups]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.boxplot(data, tick_labels<span class="op">=</span>groups)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Do 'Early spring' years have warmer late-winter LOW temps?"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Avg low temp (°F) during Feb 2 → 6 weeks"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, axis<span class="op">=</span><span class="st">"y"</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[31]</span><span class="ansi-green-fg">, line 3</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Boxplot of average lows by prediction group</span>
+<span class="ansi-green-fg">      2</span> groups = [<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">More winter</span><span class="ansi-yellow-fg">"</span>, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Early spring</span><span class="ansi-yellow-fg">"</span>]
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">3</span> data = [<span class="ansi-yellow-bg">winter_merged</span>.loc[winter_merged[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">prediction</span><span class="ansi-yellow-fg">"</span>]==g, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">low_mean</span><span class="ansi-yellow-fg">"</span>] <span style="font-weight:bold;color:rgb(0,135,0)">for</span> g <span style="font-weight:bold;color:rgb(175,0,255)">in</span> groups]
+<span class="ansi-green-fg">      5</span> plt.figure(figsize=(<span class="ansi-green-fg">6</span>,<span class="ansi-green-fg">4</span>))
+<span class="ansi-green-fg">      6</span> plt.boxplot(data, tick_labels=groups)
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_merged' is not defined</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="q3-early-spring-should-mean-warming-faster-right" class="level2">
+<h2 class="anchored" data-anchor-id="q3-early-spring-should-mean-warming-faster-right">Q3) “Early spring” should mean warming faster — right?</h2>
+<p>A key part of the Groundhog Day myth is the idea that spring arrives sooner.</p>
+<p>So I measured “warm up faster” two ways:</p>
+<ol type="1">
+<li>The <strong>average temperature trajectory</strong> day-by-day after Feb 2</li>
+<li>A simple <strong>warming rate</strong> for each year (a slope: °F per day)</li>
+</ol>
+<p>If “Early spring” is real, those years should show a steeper upward trend.</p>
+<div id="32d1c1a2-c5a7-4388-b383-af7ebb3cb10f" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add "day since Feb 2" index within each year</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>winter_weather <span class="op">=</span> winter_weather.copy()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>winter_weather[<span class="st">"day_since_gh"</span>] <span class="op">=</span> (winter_weather[<span class="st">"date"</span>] <span class="op">-</span> pd.to_datetime(<span class="bu">dict</span>(year<span class="op">=</span>winter_weather[<span class="st">"year"</span>], month<span class="op">=</span><span class="dv">2</span>, day<span class="op">=</span><span class="dv">2</span>))).dt.days</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge prediction onto daily rows</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>winter_daily <span class="op">=</span> winter_weather.merge(predict_df[[<span class="st">"year"</span>,<span class="st">"prediction"</span>]], on<span class="op">=</span><span class="st">"year"</span>, how<span class="op">=</span><span class="st">"inner"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Average trajectory by group (mean low temp each day index)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>traj <span class="op">=</span> (</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    winter_daily</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"prediction"</span>,<span class="st">"day_since_gh"</span>])[[<span class="st">"high"</span>,<span class="st">"low"</span>]]</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    .mean()</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot LOW trajectory</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> g <span class="kw">in</span> [<span class="st">"More winter"</span>, <span class="st">"Early spring"</span>]:</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> traj[traj[<span class="st">"prediction"</span>]<span class="op">==</span>g]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    plt.plot(sub[<span class="st">"day_since_gh"</span>], sub[<span class="st">"low"</span>], marker<span class="op">=</span><span class="st">"o"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span>g)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Q3: Do 'Early spring' years warm up faster?"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Days since Feb 2"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Average low temp (°F)"</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[32]</span><span class="ansi-green-fg">, line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Add "day since Feb 2" index within each year</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">2</span> winter_weather = <span class="ansi-yellow-bg">winter_weather</span>.copy()
+<span class="ansi-green-fg">      3</span> winter_weather[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">day_since_gh</span><span class="ansi-yellow-fg">"</span>] = (winter_weather[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">date</span><span class="ansi-yellow-fg">"</span>] - pd.to_datetime(<span style="color:rgb(0,135,0)">dict</span>(year=winter_weather[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">year</span><span class="ansi-yellow-fg">"</span>], month=<span class="ansi-green-fg">2</span>, day=<span class="ansi-green-fg">2</span>))).dt.days
+<span class="ansi-green-fg">      5</span> <span style="font-style:italic;color:rgb(95,135,135)"># Merge prediction onto daily rows</span>
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_weather' is not defined</pre>
+</div>
+</div>
+</div>
+<div id="c78e3e63-dc04-475b-8585-930494fe32d4" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute a simple slope per year: low ~ day_since_gh</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>slopes <span class="op">=</span> []</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> yr, df_yr <span class="kw">in</span> winter_daily.groupby(<span class="st">"year"</span>):</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> df_yr[<span class="st">"day_since_gh"</span>].values</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> df_yr[<span class="st">"low"</span>].values</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># polyfit slope</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    slope <span class="op">=</span> np.polyfit(x, y, <span class="dv">1</span>)[<span class="dv">0</span>]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    pred <span class="op">=</span> df_yr[<span class="st">"prediction"</span>].iloc[<span class="dv">0</span>]</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    slopes.append({<span class="st">"year"</span>: yr, <span class="st">"prediction"</span>: pred, <span class="st">"warming_slope_low_per_day"</span>: slope})</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>slopes_df <span class="op">=</span> pd.DataFrame(slopes)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>slopes_df.groupby(<span class="st">"prediction"</span>)[<span class="st">"warming_slope_low_per_day"</span>].describe().<span class="bu">round</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[18]</span><span class="ansi-green-fg">, line 3</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Compute a simple slope per year: low ~ day_since_gh</span>
+<span class="ansi-green-fg">      2</span> slopes = []
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">3</span> <span style="font-weight:bold;color:rgb(0,135,0)">for</span> yr, df_yr <span style="font-weight:bold;color:rgb(175,0,255)">in</span> <span class="ansi-yellow-bg">winter_daily</span>.groupby(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">year</span><span class="ansi-yellow-fg">"</span>):
+<span class="ansi-green-fg">      4</span>     x = df_yr[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">day_since_gh</span><span class="ansi-yellow-fg">"</span>].values
+<span class="ansi-green-fg">      5</span>     y = df_yr[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">low</span><span class="ansi-yellow-fg">"</span>].values
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_daily' is not defined</pre>
+</div>
+</div>
+</div>
+<div id="f5dea80a-5a70-42fe-96bc-f7658c2e27a3" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot slopes by group</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> [slopes_df.loc[slopes_df[<span class="st">"prediction"</span>]<span class="op">==</span>g, <span class="st">"warming_slope_low_per_day"</span>] <span class="cf">for</span> g <span class="kw">in</span> [<span class="st">"More winter"</span>,<span class="st">"Early spring"</span>]]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.boxplot(data, tick_labels<span class="op">=</span>[<span class="st">"More winter"</span>,<span class="st">"Early spring"</span>])</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Q3: Warming speed (slope of LOW temp per day) by prediction group"</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"°F per day (positive = warming faster)"</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, axis<span class="op">=</span><span class="st">"y"</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[19]</span><span class="ansi-green-fg">, line 2</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Boxplot slopes by group</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">2</span> data = [<span class="ansi-yellow-bg">slopes_df</span>.loc[slopes_df[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">prediction</span><span class="ansi-yellow-fg">"</span>]==g, <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">warming_slope_low_per_day</span><span class="ansi-yellow-fg">"</span>] <span style="font-weight:bold;color:rgb(0,135,0)">for</span> g <span style="font-weight:bold;color:rgb(175,0,255)">in</span> [<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">More winter</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Early spring</span><span class="ansi-yellow-fg">"</span>]]
+<span class="ansi-green-fg">      4</span> plt.figure(figsize=(<span class="ansi-green-fg">6</span>,<span class="ansi-green-fg">4</span>))
+<span class="ansi-green-fg">      5</span> plt.boxplot(data, tick_labels=[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">More winter</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Early spring</span><span class="ansi-yellow-fg">"</span>])
+
+<span class="ansi-red-fg">NameError</span>: name 'slopes_df' is not defined</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="q4-the-big-twist-late-winter-is-wildly-different-year-to-year" class="level2">
+<h2 class="anchored" data-anchor-id="q4-the-big-twist-late-winter-is-wildly-different-year-to-year">Q4) The big twist: late-winter is <em>wildly different</em> year to year</h2>
+<p>Before I even separate “more winter” vs “early spring,” one thing jumps out:</p>
+<p>Some years are <strong>consistently cold</strong> across the whole six-week stretch. Other years it is already quite warm by late February.</p>
+<p>So if Phil is going to be right, he’s predicting into a system that already has huge natural variation.</p>
+<div id="4a5cd731-dca0-4cf6-bb6f-9afc9b2d95bb" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize each year's 6-week window</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>winter_yearly <span class="op">=</span> (</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    winter_weather</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"year"</span>)[[<span class="st">"high"</span>,<span class="st">"low"</span>,<span class="st">"rain"</span>,<span class="st">"snow"</span>]]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    .agg({</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"high"</span>:[np.mean, np.<span class="bu">min</span>, np.<span class="bu">max</span>],</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"low"</span>:[np.mean, np.<span class="bu">min</span>, np.<span class="bu">max</span>],</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rain"</span>:[np.<span class="bu">sum</span>],</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"snow"</span>:[np.<span class="bu">sum</span>]</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>winter_yearly.columns <span class="op">=</span> [<span class="st">"_"</span>.join([c[<span class="dv">0</span>], c[<span class="dv">1</span>]]) <span class="cf">for</span> c <span class="kw">in</span> winter_yearly.columns]</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>winter_yearly <span class="op">=</span> winter_yearly.reset_index()</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot year-to-year average lows (variation)</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>plt.plot(winter_yearly[<span class="st">"year"</span>], winter_yearly[<span class="st">"low_mean"</span>], marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Year-to-year variation: Average LOW temp (Feb 2 → 6 weeks) in Philadelphia (2005–2025)"</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Avg low (°F)"</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[20]</span><span class="ansi-green-fg">, line 3</span>
+<span class="ansi-green-fg">      1</span> <span style="font-style:italic;color:rgb(95,135,135)"># Summarize each year's 6-week window</span>
+<span class="ansi-green-fg">      2</span> winter_yearly = (
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">3</span>     <span class="ansi-yellow-bg">winter_weather</span>
+<span class="ansi-green-fg">      4</span>     .groupby(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">year</span><span class="ansi-yellow-fg">"</span>)[[<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">high</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">low</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">rain</span><span class="ansi-yellow-fg">"</span>,<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">snow</span><span class="ansi-yellow-fg">"</span>]]
+<span class="ansi-green-fg">      5</span>     .agg({
+<span class="ansi-green-fg">      6</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">high</span><span class="ansi-yellow-fg">"</span>:[np.mean, np.min, np.max],
+<span class="ansi-green-fg">      7</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">low</span><span class="ansi-yellow-fg">"</span>:[np.mean, np.min, np.max],
+<span class="ansi-green-fg">      8</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">rain</span><span class="ansi-yellow-fg">"</span>:[np.sum],
+<span class="ansi-green-fg">      9</span>         <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">snow</span><span class="ansi-yellow-fg">"</span>:[np.sum]
+<span class="ansi-green-fg">     10</span>     })
+<span class="ansi-green-fg">     11</span> )
+<span class="ansi-green-fg">     13</span> winter_yearly.columns = [<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">_</span><span class="ansi-yellow-fg">"</span>.join([c[<span class="ansi-green-fg">0</span>], c[<span class="ansi-green-fg">1</span>]]) <span style="font-weight:bold;color:rgb(0,135,0)">for</span> c <span style="font-weight:bold;color:rgb(175,0,255)">in</span> winter_yearly.columns]
+<span class="ansi-green-fg">     14</span> winter_yearly = winter_yearly.reset_index()
+
+<span class="ansi-red-fg">NameError</span>: name 'winter_weather' is not defined</pre>
+</div>
+</div>
+</div>
+</section>
+<section id="q5-final-verdict-is-phil-meaningfully-related-to-philly-weather" class="level2">
+<h2 class="anchored" data-anchor-id="q5-final-verdict-is-phil-meaningfully-related-to-philly-weather">Q5) Final verdict: is Phil meaningfully related to Philly weather?</h2>
+<p>Here’s what I take away after comparing 2005–2025:</p>
+<ul>
+<li>Philly’s late-winter weather has <strong>big year-to-year variation</strong> no matter what Phil says.</li>
+<li>“Early spring” years may look a bit warmer in some summaries, but the overlap is usually big enough that it’s hard to treat the prediction as reliable.</li>
+</ul>
+<section id="so-should-you-trust-the-groundhog" class="level3">
+<h3 class="anchored" data-anchor-id="so-should-you-trust-the-groundhog">So should you trust the groundhog?</h3>
+<p>Unfortunately, while it may be fun to believe in this myth, the groundhod is not a reliable source. You should still always remember to have a jacket handy with you in February and March, but sometimes it may be a bit warmer simply because of weather variations.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/tamro-1406\.github\.io\/comm3180_S26_Blog\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
