@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Ask anyone who has lived in Philadelphia for more than a decade and they will tell you the winters feel different now. Less biting. Fewer truly miserable stretches. More of those strange 55°F days in January that feel wrong but are welcome anyway.</p>
 <p>But feelings are not data. So I went looking for the actual numbers.</p>
 <p>Using 20 full winters of Philadelphia daily weather records — from the winter of 2005–06 through 2024–25 — I tracked average temperatures, days where it never climbed above freezing, and total snowfall. The headline finding is that yes, winters are warming. But the full story has a twist that the trend line alone will not show you.</p>
-<div id="cell-3" class="cell" data-execution_count="12">
+<div id="cell-3" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -246,7 +246,7 @@ Least snow in a single winter: 0.3" (2020-21)</code></pre>
 <p>The chart below shows the average daily high temperature for each winter from 2006 through 2025. The trend line slopes upward at roughly 0.17°F per year — modest on its own, but across two decades that adds up to nearly 3°F warmer winters on average.</p>
 <p>The last five winters averaged a high of 45.7°F, compared to 43.1°F for the first five. That gap is real and consistent with what people feel when they say winters are “not as bad as they used to be.”</p>
 <p>But look closely at the individual bars, and the story gets messier.</p>
-<div id="cell-5" class="cell" data-execution_count="9">
+<div id="cell-5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> avg_high.index.tolist()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.arange(<span class="bu">len</span>(years))</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -302,7 +302,7 @@ Least snow in a single winter: 0.3" (2020-21)</code></pre>
 <p>Even as the overall average drifted upward, Philadelphia still had winters that would make you question every life choice that led you here. The winter of 2009–10 dumped nearly 79 inches of snow on the city — the most in these 20 years by a wide margin. Winter 2013–14 had 20 days where the temperature never broke 32°F. And 2025 came in colder than most of the 2010s.</p>
 <p>Meanwhile, winter 2019–20 managed just 0.3 inches of snow all season, and 2023 tied for the mildest average high in the dataset.</p>
 <p>The pattern is not steady warming. It is wild swings with a slightly higher floor.</p>
-<div id="cell-7" class="cell" data-execution_count="10">
+<div id="cell-7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="dv">5</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>ax1.bar(x, snow_total.values, color<span class="op">=</span><span class="st">'#7aaed4'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, label<span class="op">=</span><span class="st">'Total snowfall (inches)'</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
@@ -351,7 +351,7 @@ Least snow in a single winter: 0.3" (2020-21)</code></pre>
 <h2 class="anchored" data-anchor-id="mild-winters-are-more-common-but-not-guaranteed">Mild Winters Are More Common — But Not Guaranteed</h2>
 <p>The final chart puts it plainly. In the first decade of this dataset, cold winters outnumbered mild ones. In the second decade, that flipped. But even in the milder era, the data occasionally reminds you that Philly winters have not been fully tamed.</p>
 <p>The number of days per winter that stayed below freezing all day has declined on average — from about 9 in the early 2010s to around 6 in recent years. That is a real improvement. But 2014 and 2025 both pushed back hard against that trend.</p>
-<div id="cell-9" class="cell" data-execution_count="11">
+<div id="cell-9" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Split into decade-style halves for comparison</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>first_half <span class="op">=</span> avg_high[avg_high.index <span class="op">&lt;=</span> <span class="dv">2015</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>second_half <span class="op">=</span> avg_high[avg_high.index <span class="op">&gt;=</span> <span class="dv">2016</span>]</span>

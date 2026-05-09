@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>From 2015 to 2019, Philadelphia averaged around 1,364 shooting victims per year. That number was already high enough to place the city among the most violent in the United States. Then 2020 happened.</p>
 <p>In a single year, shootings jumped 66% above the pre-pandemic average. In 2021, the city recorded 2,342 shooting victims – the highest total in this dataset, and one of the highest in the city’s modern history. One in five of those people died.</p>
 <p>The Philadelphia PPD shooting data covers over 17,500 victims from 2015 through early 2026. What it shows is not just a city with a gun violence problem. It is a city where something broke in 2020 and has not fully healed since.</p>
-<div id="cell-3" class="cell" data-execution_count="1">
+<div id="cell-3" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -245,7 +245,7 @@ Peak year: 2021 with 2342 victims</code></pre>
 <p>The surge in 2020 and 2021 stands alone. Between 2015 and 2019, shooting totals were roughly flat – fluctuating between 1,265 and 1,473 victims per year. Then in 2020, the count jumped to 2,259. In 2021, it reached 2,342.</p>
 <p>The fatality rate – the share of shooting victims who died – stayed remarkably stable throughout, hovering around 20 to 21%. That consistency tells its own story: the lethality of gun violence in Philadelphia did not change. The volume did. More guns, more conflicts, more shootings across the board.</p>
 <p>By 2023 and 2024, the numbers began to fall. But even in 2024, Philadelphia recorded 1,112 shooting victims – still below the 2020-2022 peak, but well above the pre-pandemic baseline.</p>
-<div id="cell-5" class="cell">
+<div id="cell-5" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="dv">5</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -280,6 +280,13 @@ Peak year: 2021 with 2342 victims</code></pre>
 <span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>], fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">'upper left'</span>)</span>
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="philly_shootings_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="who-gets-shot-the-demographics-are-stark" class="level2">
@@ -287,7 +294,7 @@ Peak year: 2021 with 2342 victims</code></pre>
 <p>The victim profile in this dataset is not evenly distributed across the city’s population. It is highly concentrated by age, sex, and race.</p>
 <p>89% of shooting victims in Philadelphia are male. The median age is 27. More than 60% of victims are between 18 and 34 years old – young adults at the peak of their lives. Children under 18 account for nearly 1,500 victims over this period. People 65 and older represent just 167.</p>
 <p>Black Philadelphians make up 81% of shooting victims in the dataset despite representing approximately 41% of the city’s population. This is not a city-wide problem distributed evenly. It is a crisis concentrated in specific communities, at specific ages, overwhelmingly hitting men.</p>
-<div id="cell-7" class="cell" data-execution_count="2">
+<div id="cell-7" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bins   <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">35</span>, <span class="dv">50</span>, <span class="dv">65</span>, <span class="dv">120</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'Under 10'</span>, <span class="st">'10-17'</span>, <span class="st">'18-24'</span>, <span class="st">'25-34'</span>, <span class="st">'35-49'</span>, <span class="st">'50-64'</span>, <span class="st">'65+'</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_full[<span class="st">'age_group'</span>] <span class="op">=</span> pd.cut(df_full[<span class="st">'age'</span>], bins<span class="op">=</span>bins, labels<span class="op">=</span>labels, right<span class="op">=</span><span class="va">False</span>)</span>
@@ -323,18 +330,11 @@ Peak year: 2021 with 2342 victims</code></pre>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[2]</span><span class="ansi-green-fg">, line 3</span>
-<span class="ansi-green-fg">      1</span> bins   = [<span class="ansi-green-fg">0</span>, <span class="ansi-green-fg">10</span>, <span class="ansi-green-fg">18</span>, <span class="ansi-green-fg">25</span>, <span class="ansi-green-fg">35</span>, <span class="ansi-green-fg">50</span>, <span class="ansi-green-fg">65</span>, <span class="ansi-green-fg">120</span>]
-<span class="ansi-green-fg">      2</span> labels = [<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">Under 10</span><span class="ansi-yellow-fg">'</span>, <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">10-17</span><span class="ansi-yellow-fg">'</span>, <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">18-24</span><span class="ansi-yellow-fg">'</span>, <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">25-34</span><span class="ansi-yellow-fg">'</span>, <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">35-49</span><span class="ansi-yellow-fg">'</span>, <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">50-64</span><span class="ansi-yellow-fg">'</span>, <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">65+</span><span class="ansi-yellow-fg">'</span>]
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">3</span> df_full[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">age_group</span><span class="ansi-yellow-fg">'</span>] = pd.cut(<span class="ansi-yellow-bg">df_full</span>[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">age</span><span class="ansi-yellow-fg">'</span>], bins=bins, labels=labels, right=<span style="font-weight:bold;color:rgb(0,135,0)">False</span>)
-<span class="ansi-green-fg">      5</span> age_counts = df_full[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">age_group</span><span class="ansi-yellow-fg">'</span>].value_counts().reindex(labels)
-<span class="ansi-green-fg">      6</span> race_counts = df_full[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">race</span><span class="ansi-yellow-fg">'</span>].map({<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">B</span><span class="ansi-yellow-fg">'</span>:<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">Black</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">W</span><span class="ansi-yellow-fg">'</span>:<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">White</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">A</span><span class="ansi-yellow-fg">'</span>:<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">Asian</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">U</span><span class="ansi-yellow-fg">'</span>:<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">Unknown</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">O</span><span class="ansi-yellow-fg">'</span>:<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">Other</span><span class="ansi-yellow-fg">'</span>}).value_counts()
-
-<span class="ansi-red-fg">NameError</span>: name 'df_full' is not defined</pre>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="philly_shootings_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
 </div>
@@ -345,7 +345,7 @@ Peak year: 2021 with 2342 victims</code></pre>
 <p>93% of shootings happen outdoors. The peak hour is 9pm, and the top five hours are all between 7pm and midnight. The safest hours by far are 4am to 6am – not because the city is safer, but because the streets are empty.</p>
 <p>Seasonally, summer months dominate: July and August together account for roughly 22% of the annual total. January and February are the quietest months. This is consistent with what researchers call the “summer effect” – more people outside, more conflicts, more opportunities for violence.</p>
 <p>Fridays, Saturdays, and Sundays account for 44% of shootings despite being only three of seven days.</p>
-<div id="cell-9" class="cell" data-execution_count="3">
+<div id="cell-9" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>hour_data <span class="op">=</span> df_full.groupby(<span class="st">'hour'</span>).agg(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    total<span class="op">=</span>(<span class="st">'objectid'</span>,<span class="st">'count'</span>),</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    fatal<span class="op">=</span>(<span class="st">'fatal_bool'</span>,<span class="st">'sum'</span>)</span>
@@ -384,19 +384,11 @@ Peak year: 2021 with 2342 victims</code></pre>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[3]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> hour_data = <span class="ansi-yellow-bg">df_full</span>.groupby(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">hour</span><span class="ansi-yellow-fg">'</span>).agg(
-<span class="ansi-green-fg">      2</span>     total=(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">objectid</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">count</span><span class="ansi-yellow-fg">'</span>),
-<span class="ansi-green-fg">      3</span>     fatal=(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">fatal_bool</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">sum</span><span class="ansi-yellow-fg">'</span>)
-<span class="ansi-green-fg">      4</span> ).reset_index().dropna()
-<span class="ansi-green-fg">      5</span> hour_data = hour_data[hour_data[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">hour</span><span class="ansi-yellow-fg">'</span>].between(<span class="ansi-green-fg">0</span>, <span class="ansi-green-fg">23</span>)]
-<span class="ansi-green-fg">      7</span> month_data = df_full.groupby(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">month</span><span class="ansi-yellow-fg">'</span>).size().reset_index(name=<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">total</span><span class="ansi-yellow-fg">'</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'df_full' is not defined</pre>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="philly_shootings_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
 </div>
@@ -406,7 +398,7 @@ Peak year: 2021 with 2342 victims</code></pre>
 <p>Shootings are not spread evenly across Philadelphia’s 21 police districts. The top five districts – 25, 22, 24, 35, and 39 – account for nearly half of all shooting victims in this dataset.</p>
 <p>District 25, which covers North Philadelphia, leads the city with 2,111 victims over this period. Districts 22 and 24, also in North and West Philadelphia, follow closely. These are neighborhoods with high poverty rates, limited economic opportunity, and persistent disinvestment – factors that correlate strongly with gun violence in research literature.</p>
 <p>By contrast, the districts covering Center City, Northeast Philadelphia, and the affluent northwest of the city barely register on this chart.</p>
-<div id="cell-11" class="cell" data-execution_count="4">
+<div id="cell-11" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dist_data <span class="op">=</span> df_full.groupby(<span class="st">'dist'</span>).agg(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    total<span class="op">=</span>(<span class="st">'objectid'</span>,<span class="st">'count'</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    fatal<span class="op">=</span>(<span class="st">'fatal_bool'</span>,<span class="st">'sum'</span>)</span>
@@ -433,19 +425,11 @@ Peak year: 2021 with 2342 victims</code></pre>
 <span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>], fontsize<span class="op">=</span><span class="dv">9</span>)</span>
 <span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[4]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> dist_data = <span class="ansi-yellow-bg">df_full</span>.groupby(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">dist</span><span class="ansi-yellow-fg">'</span>).agg(
-<span class="ansi-green-fg">      2</span>     total=(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">objectid</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">count</span><span class="ansi-yellow-fg">'</span>),
-<span class="ansi-green-fg">      3</span>     fatal=(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">fatal_bool</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">sum</span><span class="ansi-yellow-fg">'</span>)
-<span class="ansi-green-fg">      4</span> ).reset_index().dropna()
-<span class="ansi-green-fg">      5</span> dist_data[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">dist_label</span><span class="ansi-yellow-fg">'</span>] = <span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">District </span><span class="ansi-yellow-fg">'</span> + dist_data[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">dist</span><span class="ansi-yellow-fg">'</span>].astype(<span style="color:rgb(0,135,0)">int</span>).astype(<span style="color:rgb(0,135,0)">str</span>)
-<span class="ansi-green-fg">      6</span> dist_data = dist_data.sort_values(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">total</span><span class="ansi-yellow-fg">'</span>, ascending=<span style="font-weight:bold;color:rgb(0,135,0)">False</span>).head(<span class="ansi-green-fg">12</span>)
-
-<span class="ansi-red-fg">NameError</span>: name 'df_full' is not defined</pre>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="philly_shootings_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
 </div>

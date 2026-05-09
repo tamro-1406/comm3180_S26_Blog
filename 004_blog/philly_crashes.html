@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Philadelphia logged over 214,000 crashes between 2005 and 2024. If you plot the raw crash count over time, the line goes down. Fewer crashes per year than two decades ago. That sounds like progress.</p>
 <p>But there is a second line hiding underneath the first one, and it goes in the opposite direction.</p>
 <p>When you look at what those crashes actually do to people – who dies, who gets hurt, who drives away without stopping – the story of Philadelphia’s roads is not one of improvement. It is a story of a city where crashes became less frequent but dramatically more deadly, and where the pandemic broke something that has not been fixed since.</p>
-<div id="cell-3" class="cell" data-execution_count="4">
+<div id="cell-3" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -244,7 +244,7 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <p>From 2005 to 2019, Philadelphia averaged around 11,000 crashes a year. Since 2020, that number has fallen – but not for good reasons.</p>
 <p>The death rate per 1,000 crashes tells the real story. Before the pandemic, Philadelphia typically saw 8 to 10 deaths per 1,000 crashes. In 2020, that number jumped to 16.3. By 2024, it had reached 18.5.</p>
 <p>Fewer crashes, but nearly twice as likely to be fatal. The city did not get safer. The crashes that remained got worse.</p>
-<div id="cell-5" class="cell" data-execution_count="3">
+<div id="cell-5" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, ax1 <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="dv">5</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ax2 <span class="op">=</span> ax1.twinx()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -287,7 +287,7 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <p>Instead, Philadelphia recorded 166 traffic fatalities – the highest count since the dataset begins in 2005, and 82% more than the year before. The death rate nearly doubled. Hit-and-run crashes reached 2,455, rising to 2,579 in 2021 – the all-time high in this dataset.</p>
 <p>Empty streets did not produce cautious drivers. They produced faster ones. And drivers who crash on empty roads, at higher speeds, are far less likely to survive.</p>
 <p>The pedestrian death count tells the same story. Philadelphia averaged 34 pedestrian deaths per year from 2005 to 2019. From 2020 onwards, that average rose to 44 – a 29% increase, in years when there were nominally fewer people on the roads.</p>
-<div id="cell-7" class="cell">
+<div id="cell-7" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Left: fatalities bar, colored pre/post 2020</span></span>
@@ -327,6 +327,13 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="philly_crashes_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="what-actually-kills-people-the-anatomy-of-a-fatal-crash" class="level2">
@@ -334,7 +341,7 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <p>The flag data allows a closer look at what is actually happening in the crashes that kill people. Looking at all fatal crashes in Philadelphia across the full 20-year dataset, a clear profile emerges.</p>
 <p>Impairment – alcohol or drugs – is a factor in 29% of fatal crashes. Speeding is flagged in 28%. One in three fatal crashes involves a pedestrian. And 15.5% of fatal crashes are hit-and-runs: someone caused a death and then drove away.</p>
 <p>Distracted driving, which gets enormous public attention, appears in just 2% of fatal crashes in this dataset – though that figure is likely an undercount given how hard it is to record after the fact.</p>
-<div id="cell-9" class="cell">
+<div id="cell-9" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fatal_flags <span class="op">=</span> flag_p[flag_p[<span class="st">'FATAL_COUNT'</span>] <span class="op">&gt;</span> <span class="dv">0</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>flag_cols <span class="op">=</span> {</span>
@@ -373,6 +380,13 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>], fontsize<span class="op">=</span><span class="dv">9</span>)</span>
 <span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="philly_crashes_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="when-and-where-the-patterns-behind-the-numbers" class="level2">
@@ -380,7 +394,7 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <p>Crashes in Philadelphia are not random. They cluster in predictable ways.</p>
 <p>The most dangerous hours for total crash volume are the evening rush: 4pm to 6pm accounts for a disproportionate share of the daily total, peaking at 5pm. But fatal crashes show a different pattern – they are overrepresented in late-night and early-morning hours, when speeds are higher and impairment is more common.</p>
 <p>Fridays and Saturdays lead in total crash count, but fatalities are highest on Sundays and Saturdays – consistent with late-night weekend driving patterns.</p>
-<div id="cell-11" class="cell" data-execution_count="2">
+<div id="cell-11" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hour_data <span class="op">=</span> philly.groupby(<span class="st">'HOUR_OF_DAY'</span>).agg(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    crashes    <span class="op">=</span> (<span class="st">'CRN'</span>,<span class="st">'count'</span>),</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    fatalities <span class="op">=</span> (<span class="st">'FATAL_COUNT'</span>,<span class="st">'sum'</span>)</span>
@@ -428,19 +442,11 @@ Peak death rate per 1,000 crashes: 18.5 (year: 2024)</code></pre>
 <span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[2]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> hour_data = <span class="ansi-yellow-bg">philly</span>.groupby(<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">HOUR_OF_DAY</span><span class="ansi-yellow-fg">'</span>).agg(
-<span class="ansi-green-fg">      2</span>     crashes    = (<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">CRN</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">count</span><span class="ansi-yellow-fg">'</span>),
-<span class="ansi-green-fg">      3</span>     fatalities = (<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">FATAL_COUNT</span><span class="ansi-yellow-fg">'</span>,<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">sum</span><span class="ansi-yellow-fg">'</span>)
-<span class="ansi-green-fg">      4</span> ).reset_index()
-<span class="ansi-green-fg">      5</span> hour_data = hour_data[hour_data[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">HOUR_OF_DAY</span><span class="ansi-yellow-fg">'</span>].between(<span class="ansi-green-fg">0</span>, <span class="ansi-green-fg">23</span>)]
-<span class="ansi-green-fg">      6</span> hour_data[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">fatal_rate</span><span class="ansi-yellow-fg">'</span>] = hour_data[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">fatalities</span><span class="ansi-yellow-fg">'</span>] / hour_data[<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">crashes</span><span class="ansi-yellow-fg">'</span>] * <span class="ansi-green-fg">1000</span>
-
-<span class="ansi-red-fg">NameError</span>: name 'philly' is not defined</pre>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="philly_crashes_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
 </div>
