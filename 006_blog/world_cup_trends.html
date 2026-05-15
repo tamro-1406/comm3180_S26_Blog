@@ -8,7 +8,7 @@
 
 <meta name="author" content="Tarek Amro">
 <meta name="dcterms.date" content="2026-05-15">
-<meta name="description" content="Using Google Trends data from 2004 to 2026 to track how US interest in the World Cup has evolved – and what hosting the tournament in 2026 is quietly changing.">
+<meta name="description" content="Using Google Trends data from 2004 to 2026 to track how US interest in the World Cup has evolved, and what hosting the tournament in 2026 is quietly changing.">
 
 <title>America Is Finally Paying Attention – Tarek’s Data Stories</title>
 <style>
@@ -166,7 +166,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Using Google Trends data from 2004 to 2026 to track how US interest in the World Cup has evolved – and what hosting the tournament in 2026 is quietly changing.
+    Using Google Trends data from 2004 to 2026 to track how US interest in the World Cup has evolved, and what hosting the tournament in 2026 is quietly changing.
   </div>
 </div>
 
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For most of the last two decades, American interest in the World Cup has followed a predictable pattern: near-zero for three years, a brief surge when the tournament actually starts, and then right back to zero. Soccer has always been the sport America was supposed to eventually care about but somehow never quite did.</p>
 <p>That might be changing. The 2026 World Cup is being hosted in the United States, Canada, and Mexico, the first time the US has hosted since 1994. And for the first time in the Google Trends era, pre-tournament search interest in the US is sitting at its highest level ever recorded outside of an actual tournament month.</p>
 <p>I pulled Google Trends data since 2004 for the search term “World Cup” in the United States and compared it against the tournament timeline to understand what American attention to soccer actually looks like, and whether 2026 is different.</p>
-<div id="cell-3" class="cell" data-execution_count="17">
+<div id="cell-3" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -241,7 +241,7 @@ Current 2026 average: 6.6 / 100</code></pre>
 <p>The full 20-year chart tells the story plainly. For most of the year in most years, American Google search interest in “World Cup” hovers between 0 and 2 out of 100. It’s essentially invisible.</p>
 <p>Then June arrives in a World Cup year and the line spikes. The tournament runs for a month. Americans watch some games, the US men’s team either performs surprisingly well or gets knocked out in embarrassing fashion, and by August the interest is back to zero.</p>
 <p>It is an extremely predictable pattern. The World Cup exists for Americans as a once every four years novelty rather than a continuous cultural presence. The average non-tournament month over the past 20 years registers just 1.7 out of 100 in search interest.</p>
-<div id="cell-5" class="cell" data-execution_count="18">
+<div id="cell-5" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wc_tournament_months <span class="op">=</span> {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2006</span>: (<span class="st">'2006-06-01'</span>, <span class="st">'2006-07-01'</span>),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2010</span>: (<span class="st">'2010-06-01'</span>, <span class="st">'2010-07-01'</span>),</span>
@@ -296,7 +296,7 @@ Current 2026 average: 6.6 / 100</code></pre>
 <p>The timing matters. 2014 was the first World Cup that played out in full view of a mature social media landscape. Twitter and Facebook were ubiquitous. Mobile streaming was very accessible. The US national team also had a legitimate shot at making noise. And the tournament coincided perfectly with summer, when Americans actually have time to watch afternoon games.</p>
 <p>Compare that to 2022 in Qatar, which peaked at 83, lower than 2014 despite the US having their best squad in year, a Cinderella run by Morocco, and the most-watched final in history. Qatar’s scheduling in November and December, when Americans are distracted by football season and the holidays, likely suppressed what should have been a higher peak.</p>
 <p>The chart below shows peak tournament-month interest for each World Cup year.</p>
-<div id="cell-7" class="cell" data-execution_count="19">
+<div id="cell-7" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>peak_data <span class="op">=</span> {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Year'</span>: [<span class="dv">2006</span>, <span class="dv">2010</span>, <span class="dv">2014</span>, <span class="dv">2018</span>, <span class="dv">2022</span>],</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Peak Interest'</span>: [<span class="dv">51</span>, <span class="dv">61</span>, <span class="dv">100</span>, <span class="dv">86</span>, <span class="dv">83</span>],</span>
@@ -347,7 +347,7 @@ Current 2026 average: 6.6 / 100</code></pre>
 <p>Since late 2025, US search interest has been ticking upward in a way that has no precedent in this dataset. In the months before every previous World Cup, the pre-tournament baseline was essentially flat. In the three months before Germany 2006, average interest was around 2. Before Brazil 2014, the all-time peak, pre-tournament interest in March and April was still only 3 or 4.</p>
 <p>Right now, in the months leading into 2026, interest is sitting between 6 and 8. That is two to three times higher than any equivalent pre-tournament period in the last 20 years.</p>
 <p>Some of this is simply proximity. Ticket sales, venue announcements, qualifying drama, and a flood of FIFA marketing have given Americans more reasons to search. But some of it is something harder to measure: the sense that this one actually matters to people who would normally not care.</p>
-<div id="cell-9" class="cell" data-execution_count="20">
+<div id="cell-9" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pre_tournament_windows <span class="op">=</span> {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'2006 (Mar-May)'</span>: df[(df[<span class="st">'date'</span>] <span class="op">&gt;=</span> <span class="st">'2006-03-01'</span>) <span class="op">&amp;</span> (df[<span class="st">'date'</span>] <span class="op">&lt;=</span> <span class="st">'2006-05-01'</span>)][<span class="st">'interest'</span>].mean(),</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'2010 (Mar-May)'</span>: df[(df[<span class="st">'date'</span>] <span class="op">&gt;=</span> <span class="st">'2010-03-01'</span>) <span class="op">&amp;</span> (df[<span class="st">'date'</span>] <span class="op">&lt;=</span> <span class="st">'2010-05-01'</span>)][<span class="st">'interest'</span>].mean(),</span>
